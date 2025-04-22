@@ -8,13 +8,7 @@
   "description": "Twine and Tracery interactive game about fishing in the East River",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "compile:src": "node build.js",
-    "compile:twee": "tweego -o dist/index.html -m src/modules/ --head=\"src/head-content.html\" project",
-    "watch:twee": "tweego -o dist/index.html -m src/modules/ --head=\"src/head-content.html\" project -w",
-    "testmode:twee": "tweego -o dist/index.html -m src/modules/ --head=\"src/head-content.html\" project -t",
-    "build": "npm run compile:src && npm run compile:twee",
-    "build:test": "npm run compile:src && npm run testmode:twee"
+    "start": "node index.js"
   },
   "devDependencies": {
     "@babel/core": "^7.26.10",
