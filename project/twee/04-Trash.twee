@@ -1,0 +1,25 @@
+:: 04-Trash
+<<script>>
+(function generate() {
+
+  let sourceTrash = {
+    "origin": "You reel in a #trash#. It's probably been in the river for #number# #time#.",
+    "trash": ["bike wheel", "plastic bottle", "can of Sprite", "hoof of a dead horse", "hubcap", "metal detector", "beer bottle", "beer can", "cardboard sixpack holder", "barbecue prong", "styrofoam takeout container", "bamboo plant", "broken flower pot", "plastic bag", "plastic bag", "plastic bag", "plastic bag made of that really tough plastic", "paper bag", "plastic bag", "plastic bottle", "saran wrapper", "candy bar wrapper", "Gatorade bottle", "chip bag", "unopened chip bag", "cigarette box", "milk crate", "dog toy", "tennis ball", "bottle that used to hold tennis balls", "tennis racket", "Nalgene bottle", "old book", "pair of headphones", "single airpod", "laptop case"],
+    "number": ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "15", "50", "73", "99", "102"],
+    "time": ["weeks","months", "years", "decades"],
+
+  }
+  let grammar = tracery.createGrammar(sourceTrash);
+  // grammar.addModifiers(tracery.baseEngModifiers);
+  let trash = grammar.flatten("#origin#");
+
+  State.variables.trash = trash;
+
+})();
+<</script>>\
+\
+$trash
+
+You can't eat this.
+
+<<include "00-Option-Cast-Line">>

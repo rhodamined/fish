@@ -4,13 +4,15 @@ FISH
 :: StoryInit
 
 /* Init global variables */\
+<<set $location to 'the East River Esplanade'>>
+<<set $location_description to 'a small sliver where Manhattan lets you close to the water'>>
 
 
 :: Start
 
 Welcome.
 
-You are on the East River Esplanade, a small sliver where Manhattan lets you close to the water.
+You are at $location, $location_description.
 
 You've come to the right place. You can go fishing here. 
 
@@ -31,19 +33,17 @@ let digit = getRandomDigit();
 
 console.log(digit);
 
-if (digit < 5) {
-  console.log('lessthan');
+if (digit < 3) {
   Engine.play("01-Fish");
 } 
-else if (digit >= 5 && digit < 7) {
-
-  console.log('middle');
+else if (digit >= 3 && digit < 5) {
   Engine.play("02-Eel");
 } 
-else if (digit >= 7 && digit < 10) {
-
-  console.log('top');
+else if (digit >= 5 && digit < 6) {
   Engine.play("03-Oyster");
+} 
+else if (digit >= 6 && digit < 10) {
+  Engine.play("04-Trash");
 }
 
 <</script>>
@@ -93,88 +93,121 @@ It's a perfect day to go fishing.
 You can [[enjoy the view.->00-Option-Enjoy-View]]
 
 
-:: 00-Tracery-Test
 
+:: 00-Option-Follow-Fish
+
+You can <<link "follow the fish.">><<script>>
+
+let hasChanged = false;
+
+let location_options = ["the East River Esplanade", 
+  "Brooklyn Bridge Park", 
+  "the parking lot behind the Astoria Costco", 
+  "Queensbridge Park"]
+
+let location_descriptions = ["a small sliver where Manhattan lets you close to the water", 
+  "in the armpit of the Brooklyn Bridge, a beautiful secret view of the water",
+  "where you don't have to pack your own snacks",
+  "sharing space with frisbees, slack lines, and happy dogs"
+]
+
+while (hasChanged != true) {
+  let num = Math.floor(Math.random() * 3);
+  
+  if (location_options[num] != State.variables.location) {
+    State.variables.location = location_options[num];
+    State.variables.location_description = location_descriptions[num];
+    hasChanged = true;
+  }
+
+}
+Engine.play("Start");
+<</script>><</link>>
+
+
+
+:: 00-Option-Follow-Eel
+
+You can <<link "follow the eel.">><<script>>
+
+let hasChanged = false;
+
+let location_options = ["the East River Esplanade", 
+  "Brooklyn Bridge Park", 
+  "the parking lot behind the Astoria Costco", 
+  "Queensbridge Park"]
+
+let location_descriptions = ["a small sliver where Manhattan lets you close to the water", 
+  "in the armpit of the Brooklyn Bridge, a beautiful secret view of the water",
+  "where you don't have to pack your own snacks",
+  "sharing space with frisbees, slack lines, and happy dogs"
+]
+
+while (hasChanged != true) {
+  let num = Math.floor(Math.random() * 3);
+  
+  if (location_options[num] != State.variables.location) {
+    State.variables.location = location_options[num];
+    State.variables.location_description = location_descriptions[num];
+    hasChanged = true;
+  }
+
+}
+Engine.play("Start");
+<</script>><</link>> 
+
+
+
+:: 00-Option-Follow-Oyster
+
+You can <<link "follow the oyster.">><<script>>
+
+let hasChanged = false;
+
+let location_options = ["the East River Esplanade", 
+  "Brooklyn Bridge Park", 
+  "the parking lot behind the Astoria Costco", 
+  "Queensbridge Park"]
+
+let location_descriptions = ["a small sliver where Manhattan lets you close to the water", 
+  "in the armpit of the Brooklyn Bridge, but with a beautiful secret view of the water",
+  "where you don't have to pack your own snacks",
+  "sharing space with frisbees, slack lines, and happy dogs"
+]
+
+while (hasChanged != true) {
+  let num = Math.floor(Math.random() * 3);
+  
+  if (location_options[num] != State.variables.location) {
+    State.variables.location = location_options[num];
+    State.variables.location_description = location_descriptions[num];
+    hasChanged = true;
+  }
+
+}
+Engine.play("Start");
+<</script>><</link>>
+
+
+:: 00-Eat-It
 <<script>>
-
 (function generate() {
 
-let grammarSource = {
-  "origin": "#interjection.capitalize#, #name#! I'm #profession.a#, not #profession.a#!",
-  "interjection": ["alas", "congratulations", "eureka", "fiddlesticks",
-    "good grief", "hallelujah", "oops", "rats", "thanks", "whoa", "yes"],
-  "name": ["Jim", "John", "Tom", "Steve", "Kevin", "Gary", "George", "Larry"],
-  "profession": [
-        "accountant",
-        "actor",
-        "archeologist",
-        "astronomer",
-        "audiologist",
-        "bartender",
-        "butcher",
-        "carpenter",
-        "composer",
-        "crossing guard",
-        "curator",
-        "detective",
-        "economist",
-        "editor",
-        "engineer",
-        "epidemiologist",
-        "farmer",
-        "flight attendant",
-        "forest fire prevention specialist",
-        "graphic designer",
-        "hydrologist",
-        "librarian",
-        "lifeguard",
-        "locksmith",
-        "mathematician",
-        "middle school teacher",
-        "nutritionist",
-        "painter",
-        "physical therapist",
-        "priest",
-        "proofreader",
-        "rancher",
-        "referee",
-        "reporter",
-        "sailor",
-        "sculptor",
-        "singer",
-        "sociologist",
-        "stonemason",
-        "surgeon",
-        "tailor",
-        "taxi driver",
-        "teacher assistant",
-        "teacher",
-        "teller",
-        "therapist",
-        "tour guide",
-        "translator",
-        "travel agent",
-        "umpire",
-        "undertaker",
-        "urban planner",
-        "veterinarian",
-        "web developer",
-        "weigher",
-        "welder",
-        "woodworker",
-        "writer",
-        "zoologist"
-]
-}
-  // remove this loop or change the loop condition if you only want
-  // to produce a single output!
-let grammar = tracery.createGrammar(grammarSource);
-// grammar.addModifiers(tracery.baseEngModifiers);
-let output = grammar.flatten("#origin#");
+  let sourceTaste = {
+    "origin": "It tasted like #adjective#. It was #adjective2# to eat.",
+    "adjective": ["sadness", "fish", "chicken", "tofu", "despair", "machine oil", "turpentine", "flowers", "chalk", "rubber", "celery", "potatoes", "the thready part of cilantro", "old times", "the future", "sadness"],
+    "adjective2": ["a joy", "brutal", "so sad", "a disappointment", "a treat", "a dream", "gut-wrenching", "tough", "time-consuming", "a bad idea", "necessary", "the right time"]
+  }
+  let grammar = tracery.createGrammar(sourceTaste);
+  let taste = grammar.flatten("#origin#");
 
-console.log(output);
+  State.variables.taste = taste;
 
 })();
+<</script>>\
+\
+You ate it.
 
+$taste
 
-<</script>>
+<<include "00-Option-Cast-Line">>

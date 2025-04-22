@@ -54,13 +54,24 @@
         "doomed, and you will be too",
         "working on myself",
         "not special"],
-    "barter": ["I'll tell you a secret", "I'll show you a better place to fish", "you'll never see me again"]
+    "barter": ["I'll tell you a secret", "I'll show you a better place to fish", "you'll never see me again", "I'll show you where my enemies are", "I'll be better"]
   }
 
   grammar = tracery.createGrammar(sourcePleading);
   let plea = grammar.flatten("#origin#");
+  State.variables.plea = plea;
+
+  let arr = plea.slice(0, -1).split(', ');
+  let exact_plea = arr[arr.length-1];
+  if (exact_plea == "I'll show you a better place to fish." || exact_plea == "I'll show you where my enemies are.") {
+    State.variables.change_location = true;
+  } else {
+    State.variables.change_location = false;
+  }
+  
 
   console.log(plea);
+  console.log(exact_plea);
   State.variables.plea = plea;
 })();
 <</script>>\
@@ -69,5 +80,7 @@ $fish
 
 $plea
 
+
+You can [[eat this.->00-Eat-It]]
+<<if $change_location is true>><<include "00-Option-Follow-Fish">><br><</if>>\
 <<include "00-Option-Cast-Line">>
-You can [[enjoy the view.->00-Option-Enjoy-View]]
