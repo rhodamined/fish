@@ -1,0 +1,38 @@
+:: 03-Oyster
+<<script>>
+(function generate() {
+
+  let sourceOyster = {
+    "origin": "You've caught a #adjective# #size#-inch oyster. \n\nIt's encrusted with #things#.",
+    "adjective": ["tiny", "huge", "slippery", "sweet-smelling", "beautiful", "wayward"],
+    "size": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "15"],
+    "things": ["barnacles", "seaweed", "pebbles", "grains of sand", "other tiny oysters", "old pennies", "rusty nails", "pearls", "tiny white stones", "tar", "concrete"]
+    }
+
+  let grammar = tracery.createGrammar(sourceOyster);
+  // grammar.addModifiers(tracery.baseEngModifiers);
+  let oyster = grammar.flatten("#origin#");
+
+  console.log(oyster);
+  State.variables.oyster = oyster;
+
+  let sourcePleading = {
+    "origin": "\"Please don't hurt me,\" it says, \"I'm #reason#. If you let me go, #barter#.\"",
+    "reason": ["doing a public service", "helping", "better than you", "saving this river", "never going to see the world", "in love", "tired", "cleaning the water", "a spy", "on your side", "a dream", "the police"],
+    "barter": ["I'll tell you a secret", "I'll show you a better place to fish", "you'll never see me again"]
+  }
+
+  grammar = tracery.createGrammar(sourcePleading);
+  let plea = grammar.flatten("#origin#");
+
+  console.log(plea);
+  State.variables.plea = plea;
+})();
+<</script>>\
+\
+$oyster
+
+$plea
+
+<<include "00-Option-Cast-Line">>
+You can [[enjoy the view.->00-Option-Enjoy-View]]

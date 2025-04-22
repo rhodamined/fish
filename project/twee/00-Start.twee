@@ -6,10 +6,94 @@ FISH
 /* Init global variables */\
 
 
-
 :: Start
 
-Hello!
+Welcome.
+
+You are on the East River Esplanade, a small sliver where Manhattan lets you close to the water.
+
+You've come to the right place. You can go fishing here. 
+
+<<include "00-Option-Cast-Line">>
+You can [[enjoy the view.->00-Option-Enjoy-View]]
+
+
+:: 00-Option-Cast-Line
+
+You can <<link "cast a line.">><<script>>
+
+function getRandomDigit() {
+  let num = Math.random();
+  return parseInt(String(num)[3]);
+}
+
+let digit = getRandomDigit();
+
+console.log(digit);
+
+if (digit < 5) {
+  console.log('lessthan');
+  Engine.play("01-Fish");
+} 
+else if (digit >= 5 && digit < 7) {
+
+  console.log('middle');
+  Engine.play("02-Eel");
+} 
+else if (digit >= 7 && digit < 10) {
+
+  console.log('top');
+  Engine.play("03-Oyster");
+}
+
+<</script>>
+<</link>>
+
+
+
+:: 00-Option-Enjoy-View
+<<script>>
+(function generate() {
+
+  let grammarWeatherSource = {
+    "origin": "The #sun# is #sunny#.",
+    "sun": ["sky", "sun", "water"],
+    "sunny": ["clouded over", "gentle", "sweet", "mildly upset", "reflects your mood", "too good to be true", "full of birds", "soft on your skin", "the thing that got you out of bed this morning"]
+  }
+
+  let grammarWeather = tracery.createGrammar(grammarWeatherSource);
+  // grammar.addModifiers(tracery.baseEngModifiers);
+  let weather = grammarWeather.flatten("#origin#");
+
+  console.log(weather);
+  State.variables.weather = weather;
+
+
+  let grammarTheViewSource = {
+    "origin": "You can see #view# from here.",
+    "view": ["Randall's Island", "Long Island City", "way too many birds", "Dumbo", "your shadow in the water", "a plane passing by", "dog walkers on the opposite coast", "two friends arguing in the distance", "the ferries chasing fish toward you", "the Queensboro Bridge", "the Williamsburg Bridge", "the Manhattan Bridge", "the Brooklyn Bridge", "the Newtown Creek", "a park bench to put your kit down"]
+  }
+
+  let grammarTheView = tracery.createGrammar(grammarTheViewSource);
+  // grammar.addModifiers(tracery.baseEngModifiers);
+  let view = grammarTheView.flatten("#origin#");
+
+  console.log(view);
+  State.variables.view = view;
+})();
+<</script>>\
+\
+$weather
+$view
+
+It's a perfect day to go fishing.
+
+
+<<include "00-Option-Cast-Line">>
+You can [[enjoy the view.->00-Option-Enjoy-View]]
+
+
+:: 00-Tracery-Test
 
 <<script>>
 

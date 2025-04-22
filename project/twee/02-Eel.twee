@@ -1,0 +1,54 @@
+:: 02-Eel
+<<script>>
+(function generate() {
+
+  let sourceEel = {
+    "origin": "You've caught a #adjective# eel with a #shape#-shaped head and a #shape2#-like body. \n\nIt's #probable# #quality#.",
+    "shape": ["lamb", "goat", "cone", "square", "lightbulb", "nicely", "weirdly", "toaster", "loaf", "toilet", "bucket", "crabby", "badly", "bowl", "plate", "beach ball"],
+    "shape2": ["snake", "worm", "slinky", "spaghetti", "tapeworm", "tail", "broomstick", "cottage cheese", "plastic bottle", "candy cane", "dancer"],
+    "adjective": ["skinny", "spiny", "scaly", "rotting a little bit", "floppy", "sad", "angry", "upset", "spiky", "hard to hold onto", "pale", "energetic"],
+    "probable": ["probably not", "not", "definitely not", "surprisingly not", "potentially"],
+    "quality": ["electric", "cannibalistic", "native to these waters", "dying", "thriving", "excited to see you"]
+    }
+
+  let grammar = tracery.createGrammar(sourceEel);
+  // grammar.addModifiers(tracery.baseEngModifiers);
+  let eel = grammar.flatten("#origin#");
+
+  console.log(eel);
+  State.variables.eel = eel;
+
+  let sourcePleading = {
+    "origin": "\"Please don't hurt me,\" it says, \"I'm #reason#. If you let me go, #barter#.\"",
+    "reason": ["just trying to go home", 
+        "just passing through", 
+        "just a nobody", 
+        "a legal citizen", 
+        "a parent. I have 2 kids at home", 
+        "the only thing keeping my sister alive", 
+        "hard to eat", 
+        "going to put up a fight", 
+        "nothing to you", 
+        "slim pickings", 
+        "bad-tasting", 
+        "too young to die", 
+        "sorry for whatever they did to you",
+        "special", 
+        "not special"],
+    "barter": ["I'll tell you a secret", "I'll show you a better place to fish", "you'll never see me again"]
+  }
+
+  grammar = tracery.createGrammar(sourcePleading);
+  let plea = grammar.flatten("#origin#");
+
+  console.log(plea);
+  State.variables.plea = plea;
+})();
+<</script>>\
+\
+$eel
+
+$plea
+
+<<include "00-Option-Cast-Line">>
+You can [[enjoy the view.->00-Option-Enjoy-View]]

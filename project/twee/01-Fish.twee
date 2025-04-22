@@ -1,0 +1,73 @@
+:: 01-Fish
+<<script>>
+(function generate() {
+
+  let sourceFish = {
+    "origin": "You've caught a #adjective# fish with #number# eyes, #number2# fins, and #color#-colored scales. \n\nIt might be #fish#.",
+    "number": ["no", "one", "one", "two", "two", "two", "two", "two", "three", "four", "five", "an acceptable number of"],
+    "number2": ["no", "two", "three", "four", "five", "six", "eight"],
+    "color": ["emerald", "wine", "ocean", "diamond", "steel", "storm", "daffodil", "mint", "ice-cream", "paper", "plastic", "bottle-cap", "Sprite", "Coca Cola", "oak", "flesh","wax","lime","dishwater"],
+    "adjective": ["skinny", "whining", "crying", "rotting", "sad", "angry", "upset", "resentful", "pale", "energetic", "pleading", "wailing", "loud", "quiet"],
+    "fish": ["a saltatrix", "a bluefish", "a catfish", "a shad", "a porgy", "a smelt", "a bass", "a sea bass", "a flounder", "a fluke", "a toadfish", "a perch", "a carp", "a goldfish", "just passing through"]
+    }
+  let grammar = tracery.createGrammar(sourceFish);
+  // grammar.addModifiers(tracery.baseEngModifiers);
+  let fish = grammar.flatten("#origin#");
+
+  console.log(fish);
+  State.variables.fish = fish;
+
+  let sourcePleading = {
+    "origin": "\"Please don't hurt me,\" it says, \"I'm #reason#. If you let me go, #barter#.\"",
+    "reason": ["just trying to go home", 
+        "just passing through", 
+        "just a nobody", 
+        "a legal citizen", 
+        "a parent. I have 2 kids at home", 
+        "the only thing keeping my sister alive", 
+        "hard to eat", 
+        "not delicious",
+        "actually a real person, cursed to be a fish",
+        "never did anything to you",
+        "too pretty",
+        "three hundred and seven years old",
+        "going to put up a fight", 
+        "nothing to you", 
+        "slim pickings", 
+        "bad-tasting", 
+        "too young to die", 
+        "having a family emergency",
+        "forgetting something important",
+        "running out of time", 
+        "having a bad day",
+        "sweating the small stuff",
+        "sorry for whatever they did to you", 
+        "cold",
+        "trying my best",
+        "going to do better",
+        "seizing the means of production",
+        "special", 
+        "not a failure",
+        "at the top of my class",
+        "just misunderstood",
+        "giving up",
+        "doomed, and you will be too",
+        "working on myself",
+        "not special"],
+    "barter": ["I'll tell you a secret", "I'll show you a better place to fish", "you'll never see me again"]
+  }
+
+  grammar = tracery.createGrammar(sourcePleading);
+  let plea = grammar.flatten("#origin#");
+
+  console.log(plea);
+  State.variables.plea = plea;
+})();
+<</script>>\
+\
+$fish
+
+$plea
+
+<<include "00-Option-Cast-Line">>
+You can [[enjoy the view.->00-Option-Enjoy-View]]
