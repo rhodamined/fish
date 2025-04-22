@@ -3,7 +3,7 @@
 (function generate() {
 
   let sourceFish = {
-    "origin": "You've caught a #adjective# fish with #number# eyes, #number2# fins, and #color#-colored scales. \n\nIt might be #fish#.",
+    "origin": "You reel in a #adjective# fish with #number# eyes, #number2# fins, and #color#-colored scales. \n\nIt might be #fish#.",
     "number": ["no", "one", "one", "two", "two", "two", "two", "two", "three", "four", "five", "an acceptable number of"],
     "number2": ["no", "two", "three", "four", "five", "six", "eight"],
     "color": ["emerald", "wine", "ocean", "diamond", "steel", "storm", "daffodil", "mint", "ice-cream", "paper", "plastic", "bottle-cap", "Sprite", "Coca Cola", "oak", "flesh","wax","lime","dishwater"],

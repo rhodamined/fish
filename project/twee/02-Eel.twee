@@ -3,7 +3,7 @@
 (function generate() {
 
   let sourceEel = {
-    "origin": "You've caught a #adjective# eel with a #shape#-shaped head and a #shape2#-like body. \n\nIt's #probable# #quality#.",
+    "origin": "You've reel in a #adjective# eel with a #shape#-shaped head and a #shape2#-like body. \n\nIt's #probable# #quality#.",
     "shape": ["lamb", "goat", "cone", "square", "lightbulb", "nicely", "weirdly", "toaster", "loaf", "toilet", "bucket", "crabby", "badly", "bowl", "plate", "beach ball"],
     "shape2": ["snake", "worm", "slinky", "spaghetti", "tapeworm", "tail", "broomstick", "cottage cheese", "plastic bottle", "candy cane", "dancer"],
     "adjective": ["skinny", "spiny", "scaly", "rotting a little bit", "floppy", "sad", "angry", "upset", "spiky", "hard to hold onto", "pale", "energetic"],

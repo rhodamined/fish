@@ -3,7 +3,7 @@
 (function generate() {
 
   let sourceOyster = {
-    "origin": "You've caught a #adjective# #size#-inch oyster. \n\nIt's encrusted with #things#.",
+    "origin": "You reel in a #adjective# #size#-inch oyster. \n\nIt's encrusted with #things#.",
     "adjective": ["tiny", "huge", "slippery", "sweet-smelling", "beautiful", "wayward"],
     "size": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "15"],
     "things": ["barnacles", "seaweed", "pebbles", "grains of sand", "other tiny oysters", "old pennies", "rusty nails", "pearls", "tiny white stones", "tar", "concrete"]

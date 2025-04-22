@@ -83,3 +83,12 @@ img {
 -o-transition-duration: 3s;
 transition-duration: 3s;
 }
+
+#ui-bar {
+	display: none;
+}
+
+body {
+  background-color: white;
+  color: black;
+}
