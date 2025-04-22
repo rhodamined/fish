@@ -2,7 +2,6 @@
 dist/*.html
 #*.json
 
-birthday-450719-58355abbb601.json
 
 # Environment
 .DS_Store
