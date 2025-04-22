@@ -6,7 +6,7 @@
   "name": "fish",
   "version": "1.0.0",
   "description": "Twine and Tracery interactive game about fishing in the East River",
-  "main": "build.js",
+  "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "compile:src": "node build.js",
