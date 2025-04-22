@@ -40,5 +40,9 @@
   "bugs": {
     "url": "https://github.com/rhodamined/fish/issues"
   },
-  "homepage": "https://github.com/rhodamined/fish#readme"
+  "homepage": "https://github.com/rhodamined/fish#readme",
+  "engines": {
+    "npm": "10.9.2",
+    "node": "22.14.0"
+  }
 }

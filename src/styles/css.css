@@ -83,3 +83,8 @@ img {
 -o-transition-duration: 3s;
 transition-duration: 3s;
 }
+
+
+#ui-bar {
+	display: none;
+}
