@@ -1,0 +1,43 @@
+{
+  "dependencies": {
+    "express": "^5.1.0"
+  },
+  "name": "fish",
+  "version": "1.0.0",
+  "description": "Twine and Tracery interactive game about fishing in the East River",
+  "main": "build.js",
+  "scripts": {
+    "start": "node index.js",
+    "compile:src": "node build.js",
+    "compile:twee": "tweego -o dist/index.html -m src/modules/ --head=\"src/head-content.html\" project",
+    "watch:twee": "tweego -o dist/index.html -m src/modules/ --head=\"src/head-content.html\" project -w",
+    "testmode:twee": "tweego -o dist/index.html -m src/modules/ --head=\"src/head-content.html\" project -t",
+    "build": "npm run compile:src && npm run compile:twee",
+    "build:test": "npm run compile:src && npm run testmode:twee"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.26.10",
+    "@babel/preset-env": "^7.26.9",
+    "autoprefixer": "^10.4.21",
+    "babel": "^5.8.38",
+    "clean-css": "^5.3.3",
+    "fs-jetpack": "^5.1.0",
+    "postcss": "^8.5.3",
+    "terser": "^5.39.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rhodamined/fish.git"
+  },
+  "keywords": [
+    "twine",
+    "tweego",
+    "tracery"
+  ],
+  "author": "Rhodamined",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rhodamined/fish/issues"
+  },
+  "homepage": "https://github.com/rhodamined/fish#readme"
+}
