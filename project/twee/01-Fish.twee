@@ -4,7 +4,7 @@
 
   let sourceFish = {
     "origin": "You reel in a #adjective# fish with #number# eyes, #number2# fins, and #color#-colored scales. \n\nIt might be #fish#.",
-    "number": ["no", "one", "one", "two", "two", "two", "two", "two", "three", "four", "five", "an acceptable number of"],
+    "number": ["no", "two", "two", "two", "two", "two", "three", "four", "five", "an acceptable number of"],
     "number2": ["no", "two", "three", "four", "five", "six", "eight"],
     "color": ["emerald", "wine", "ocean", "diamond", "steel", "storm", "daffodil", "mint", "ice-cream", "paper", "plastic", "bottle-cap", "Sprite", "Coca Cola", "oak", "flesh","wax","lime","dishwater"],
     "adjective": ["skinny", "whining", "crying", "rotting", "sad", "angry", "upset", "resentful", "pale", "energetic", "pleading", "wailing", "loud", "quiet"],
@@ -18,7 +18,7 @@
   State.variables.fish = fish;
 
   let sourcePleading = {
-    "origin": "\"Please don't hurt me,\" it says, \"I'm #reason#. If you let me go, #barter#.\"",
+    "origin": "\"Please don't hurt me,\" it cries, \"I'm #reason#. If you let me go, #barter#.\"",
     "reason": ["just trying to go home", 
         "just passing through", 
         "just a nobody", 

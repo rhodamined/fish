@@ -17,8 +17,8 @@
   State.variables.oyster = oyster;
 
   let sourcePleading = {
-    "origin": "\"Please don't hurt me,\" it says, \"I'm #reason#. If you let me go, #barter#.\"",
-    "reason": ["doing a public service", "helping", "better than you", "saving this river", "never going to see the world", "in love", "tired", "cleaning the water", "a spy", "on your side", "a dream", "the police"],
+    "origin": "\"Please don't hurt me,\" it cries, \"I'm #reason#. If you let me go, #barter#.\"",
+    "reason": ["doing a public service", "helping", "better than you", "saving this river", "never going to see the world", "in love", "tired", "cleaning the water", "a spy", "on your side", "a dream"],
     "barter": ["I'll tell you a secret", "I'll show you a better place to fish", "you'll never see me again"]
   }
 
