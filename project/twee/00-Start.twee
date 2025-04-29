@@ -6,7 +6,9 @@ FISH
 /* Init global variables */\
 <<set $location to 'the East River Esplanade'>>
 <<set $location_description to 'a small sliver where Manhattan lets you close to the water'>>
-
+<<set $hp to 80>>
+<<set $ip to 0>>
+<<set $num_casts to 0>>
 
 :: Start
 
@@ -23,7 +25,7 @@ You can [[enjoy the view.->00-Option-Enjoy-View]]
 :: 00-Option-Cast-Line
 
 You can <<link "cast a line.">><<script>>
-console.log("random excuse: " + window.getExcuse(10));
+State.variables.num_casts++;
 function getRandomDigit() {
   let num = Math.random();
   return parseInt(String(num)[3]);
@@ -33,16 +35,16 @@ let digit = getRandomDigit();
 
 console.log("random digit: "+digit);
 
-if (digit < 3) {
+if (digit < 1) {
   Engine.play("01-Fish");
 } 
-else if (digit >= 3 && digit < 5) {
-  Engine.play("02-Eel");
-} 
-else if (digit >= 5 && digit < 6) {
-  Engine.play("03-Oyster");
-} 
-else if (digit >= 6 && digit < 10) {
+// else if (digit >= 3 && digit < 5) {
+//   Engine.play("02-Eel");
+// } 
+// else if (digit >= 3 && digit < 4) {
+//   Engine.play("03-Oyster");
+// } 
+else if (digit >= 2 && digit < 10) {
   Engine.play("04-Trash");
 }
 
@@ -50,8 +52,10 @@ else if (digit >= 6 && digit < 10) {
 <</link>>
 
 
-
 :: 00-Option-Enjoy-View
+
+<div id="header-include"><<include "00-Header">></div>
+
 <<script>>
 (function generate() {
 
@@ -70,8 +74,8 @@ else if (digit >= 6 && digit < 10) {
 
 
   let grammarTheViewSource = {
-    "origin": "You can see #view# from here.",
-    "view": ["Randall's Island", "Long Island City", "way too many birds", "Dumbo", "your shadow in the water", "a plane passing by", "dog walkers on the opposite coast", "two friends arguing in the distance", "the ferries chasing fish toward you", "the Queensboro Bridge", "the Williamsburg Bridge", "the Manhattan Bridge", "the Brooklyn Bridge", "the Newtown Creek", "a park bench to put your kit down"]
+    "origin": "You notice #view# from here.",
+    "view": ["way too many birds", "your shadow in the water", "a plane passing by", "the clouds rolling in", "an air of anxiety"]
   }
 
   let grammarTheView = tracery.createGrammar(grammarTheViewSource);
@@ -91,7 +95,6 @@ It's a perfect day to go fishing.
 
 <<include "00-Option-Cast-Line">>
 You can [[enjoy the view.->00-Option-Enjoy-View]]
-
 
 
 :: 00-Option-Follow-Fish
@@ -190,6 +193,9 @@ Engine.play("Start");
 
 
 :: 00-Eat-It
+
+<div id="header-include"><<include "00-Header">></div>
+<<set $ip += 1>>\
 <<script>>
 (function generate() {
 
@@ -211,3 +217,8 @@ You ate it.
 $taste
 
 <<include "00-Option-Cast-Line">>
+
+
+:: 00-Header
+<<if $num_casts > 1>><<set $hp -= 1>><</if>>\
+<span id="hp">HP: $hp / 100</span>         Fish eaten: $ip      <span id="restart"><<link "Restart">><<script>>Engine.restart()<</script>><</link>></span>

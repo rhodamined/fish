@@ -1,77 +1,67 @@
 :: 01-Fish
+<div id="header-include"><<include "00-Header">></div>
 <<script>>
 (function generate() {
 
+  // fish object: see fish.js
+  let fish = window.getFish(1);
+  console.log(fish);
+
+  // add the government names (specific species)
+  let fishnames = [fish.species];
+  if (fish.getVarieties.length > 0) {
+    for (const e of fish.getVarieties) {
+      let gov_name = e + " " + fish.species;
+      fishnames.push(gov_name);
+    }
+  }
+
+  // tracery template
   let sourceFish = {
-    "origin": "You reel in a #adjective# fish with #number# eyes, #number2# fins, and #color#-colored scales. \n\nIt might be #fish#.",
+    "origin": "You reel in a #adjective# #fishtype# with #number# eyes and #number2# fins. \n\nIt #confidence# #fish.a#.",
+    "fishtype": [fish.getType],
     "number": ["no", "two", "two", "two", "two", "two", "three", "four", "five", "an acceptable number of"],
     "number2": ["no", "two", "three", "four", "five", "six", "eight"],
-    "color": ["emerald", "wine", "ocean", "diamond", "steel", "storm", "daffodil", "mint", "ice-cream", "paper", "plastic", "bottle-cap", "Sprite", "Coca Cola", "oak", "flesh","wax","lime","dishwater"],
-    "adjective": ["skinny", "whining", "crying", "rotting", "sad", "angry", "upset", "resentful", "pale", "energetic", "pleading", "wailing", "loud", "quiet"],
-    "fish": ["a saltatrix", "a bluefish", "a catfish", "a shad", "a porgy", "a smelt", "a bass", "a sea bass", "a flounder", "a fluke", "a toadfish", "a perch", "a carp", "a goldfish", "just passing through"]
+    "confidence": [window.getConfidence(State.variables.ip)],
+    "adjective": fish.getDescriptors,
+    "fish": fishnames
     }
   let grammar = tracery.createGrammar(sourceFish);
-  // grammar.addModifiers(tracery.baseEngModifiers);
-  let fish = grammar.flatten("#origin#");
+  let fishtext = grammar.flatten("#origin#");
+  console.log("fish: " + fishtext);
 
-  console.log(fish);
-  State.variables.fish = fish;
+  // add to game state
+  State.variables.fish = fishtext;
 
+
+  // create text for fish begging for its life
+
+  State.variables.change_location = false;
+  State.variables.told_secret = false;
+
+  let barter = window.getBarter();
+  if (barter.charAt(0) == 'x') {
+    barter = barter.slice(1);
+    console.log("x: " + barter);
+    State.variables.change_location = true;
+  } else if (barter.charAt(0) == 's') {
+    barter = barter.slice(1);
+    console.log("s: " + barter);
+    State.variables.told_secret = true;
+  }
+
+  // tracery template but the randomness happens before.. hm
   let sourcePleading = {
     "origin": "\"Please don't hurt me,\" it cries, \"I'm #reason#. If you let me go, #barter#.\"",
-    "reason": ["just trying to go home", 
-        "just passing through", 
-        "just a nobody", 
-        "a legal citizen", 
-        "a parent. I have 2 kids at home", 
-        "the only thing keeping my sister alive", 
-        "hard to eat", 
-        "not delicious",
-        "actually a real person, cursed to be a fish",
-        "never did anything to you",
-        "too pretty",
-        "three hundred and seven years old",
-        "going to put up a fight", 
-        "nothing to you", 
-        "slim pickings", 
-        "bad-tasting", 
-        "too young to die", 
-        "having a family emergency",
-        "forgetting something important",
-        "running out of time", 
-        "having a bad day",
-        "sweating the small stuff",
-        "sorry for whatever they did to you", 
-        "cold",
-        "trying my best",
-        "going to do better",
-        "seizing the means of production",
-        "special", 
-        "not a failure",
-        "at the top of my class",
-        "just misunderstood",
-        "giving up",
-        "doomed, and you will be too",
-        "working on myself",
-        "not special"],
-    "barter": ["I'll tell you a secret", "I'll show you a better place to fish", "you'll never see me again", "I'll show you where my enemies are", "I'll be better"]
+    "reason": [window.getExcuse()],
+    "barter": [barter]
   }
 
   grammar = tracery.createGrammar(sourcePleading);
   let plea = grammar.flatten("#origin#");
-  State.variables.plea = plea;
 
-  let arr = plea.slice(0, -1).split(', ');
-  let exact_plea = arr[arr.length-1];
-  if (exact_plea == "I'll show you a better place to fish." || exact_plea == "I'll show you where my enemies are.") {
-    State.variables.change_location = true;
-  } else {
-    State.variables.change_location = false;
-  }
-  
 
   console.log(plea);
-  console.log(exact_plea);
   State.variables.plea = plea;
 })();
 <</script>>\
