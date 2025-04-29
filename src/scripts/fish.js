@@ -1,15 +1,42 @@
+console.log("fish.js");
+
+window.getFish = function(zone) {
+
+    let newFish = false;
+    
+    while (!newFish) {
+        let fish = getRandomElement(FishArr);
+        if (fish.zones.includes(zone)) {
+            newFish = true;
+            return fish;
+        }
+    }
+
+    function getRandomElement(array) {
+        const randomIndex = Math.floor(Math.random() * array.length);
+        return array[randomIndex];
+    }
+}
+
 class Fish {
 
-    constructor({species, size_range, zones, is_tasty, is_bfeeder}) {
+    constructor({species, type, size_range, zones, varieties, descriptors, is_tasty, is_bfeeder}) {
         this.species = species;
+        this.type = type;
         this.size_range = size_range;
         this.zones = zones;
+        this.varieties = varieties;
+        this.descriptors = descriptors;
         this.is_tasty = is_tasty;
         this.is_bfeeder = is_bfeeder;    
       }
 
     get getSpecies() {
         return this.species;
+    }
+
+    get getType() {
+        return this.type;
     }
 
     get getSizeRange() {
@@ -28,6 +55,14 @@ class Fish {
         return this.zones;
     }
 
+    get getDescriptors() {
+        return this.descriptors;
+    }
+
+    get getVarieties() {
+        return this.varieties;
+    }
+
     get isBottomFeeder() {
         return this.is_bfeeder;
     }
@@ -40,6 +75,7 @@ class Fish {
 
 const Anchovy = new Fish({
     species: "anchovy", 
+    type: "fish",
     size_range: [1, 8],
     zones: [1, 2, 3, 4, 5, 6, 7, 8],
     varieties: [],
@@ -51,6 +87,7 @@ const Anchovy = new Fish({
 
 const Bass = new Fish({
     species: "bass",
+    type: "fish",
     size_range: [3, 54],
     zones: [1, 2, 3, 4, 5, 6, 7, 8],
     varieties: ["striped"],
@@ -61,6 +98,7 @@ const Bass = new Fish({
 
 const Bluefish = new Fish({
     species: "bluefish", 
+    type: "fish",
     size_range: [3, 42],
     zones: [1, 2, 3, 4, 5, 6, 7, 8],
     varieties: [],
@@ -71,6 +109,7 @@ const Bluefish = new Fish({
 
 const Eel = new Fish({
     species: "eel", 
+    type: "eel",
     size_range: [7, 32],
     zones: [1, 2, 3, 4, 5, 6, 7, 8],
     varieties: ["American", "conger"],
@@ -82,6 +121,7 @@ const Eel = new Fish({
 
 const Flounder = new Fish({
     species: "flounder", 
+    type: "flatfish",
     size_range: [7, 32],
     zones: [1, 2, 3, 4, 5, 6, 7, 8],
     varieties: ["summer", "winter", "windowpane"],
@@ -93,6 +133,7 @@ const Flounder = new Fish({
 
 const Fluke = new Fish({
     species: "fluke", 
+    type: "flatfish",
     size_range: [14, 36],
     zones: [1, 2, 3, 4, 5, 6, 7, 8],
     varieties: [],
@@ -104,6 +145,7 @@ const Fluke = new Fish({
 
 const Herring = new Fish({
     species: "herring", 
+    type: "fish",
     size_range: [8, 18],
     zones: [1, 2, 3, 4, 5, 6, 7, 8],
     varieties: ["mossbunker"],
@@ -115,6 +157,7 @@ const Herring = new Fish({
 
 const Mummichog = new Fish({
     species: "mummichog", 
+    type: "fish",
     size_range: [1, 3],
     zones: [1, 2, 3, 4, 5, 6, 7, 8],
     varieties: [],
@@ -126,6 +169,7 @@ const Mummichog = new Fish({
 
 const Perch = new Fish({
     species: "perch", 
+    type: "fish",
     size_range: [6, 12],
     zones: [1, 2, 3, 4, 5, 6, 7, 8],
     varieties: ["silver", "white"],
@@ -137,6 +181,7 @@ const Perch = new Fish({
 
 const Porgy = new Fish({
     species: "porgy", 
+    type: "fish",
     size_range: [6, 12],
     zones: [1, 2, 3, 4, 5, 6, 7, 8],
     varieties: [],
@@ -148,6 +193,7 @@ const Porgy = new Fish({
 
 const Stingray = new Fish({
     species: "stingray", 
+    type: "fish",
     size_range: [12, 48],
     zones: [1],
     varieties: [],
@@ -157,8 +203,4 @@ const Stingray = new Fish({
 })
 
 
-
-
-console.log("locales: " + Bass.getSizeRange)
-
-
+const FishArr = [Anchovy, Bass, Bluefish, Eel, Flounder, Fluke, Herring, Mummichog, Perch, Porgy, Stingray]

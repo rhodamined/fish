@@ -6,9 +6,9 @@ window.getExcuse = function(ip) {
         ip = 0;
     }
 
-    if (ip > 10) {
+    if (ip > 4) {
         return getRandomElement(ExcusesHuman);
-    } else if (ip > 20) {
+    } else if (ip > 10) {
         return getRandomElement(ExcusesDoomed);
     } else {
         return getRandomElement(ExcusesNormal);

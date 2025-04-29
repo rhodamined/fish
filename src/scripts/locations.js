@@ -1,3 +1,17 @@
+console.log("locations.js");
+
+window.getLocation = function() {
+
+    return getRandomElement(LocationArr);
+
+    function getRandomElement(array) {
+        const randomIndex = Math.floor(Math.random() * array.length);
+        return array[randomIndex];
+    }
+}
+
+
+
 class Location {
 
     constructor({name, id, zone, boro, neighborhood, access_types, desc}) {
@@ -100,3 +114,6 @@ const Q54 = new Location({
     access_types: ['Pr'],
     desc: "If you squint, you can also see the dogs in the park across the water on Roosevelt Island."
 })
+
+
+const LocationArr = [Q42, Q43, Q44, Q45, Q52, Q54];

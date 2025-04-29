@@ -1,0 +1,1 @@
+const colors = ["emerald", "wine", "ocean", "diamond", "steel", "storm", "daffodil", "mint", "ice-cream", "paper", "plastic", "bottle-cap", "Sprite", "Coca Cola", "oak", "flesh","wax","lime","dishwater"]
