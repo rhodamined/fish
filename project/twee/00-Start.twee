@@ -23,7 +23,7 @@ You can [[enjoy the view.->00-Option-Enjoy-View]]
 :: 00-Option-Cast-Line
 
 You can <<link "cast a line.">><<script>>
-
+console.log("random excuse: " + window.getExcuse(10));
 function getRandomDigit() {
   let num = Math.random();
   return parseInt(String(num)[3]);
@@ -31,7 +31,7 @@ function getRandomDigit() {
 
 let digit = getRandomDigit();
 
-console.log(digit);
+console.log("random digit: "+digit);
 
 if (digit < 3) {
   Engine.play("01-Fish");
