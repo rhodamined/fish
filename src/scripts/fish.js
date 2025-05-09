@@ -31,6 +31,7 @@ class Fish {
         this.is_bfeeder = is_bfeeder;    
       }
 
+
     get getSpecies() {
         return this.species;
     }
@@ -49,6 +50,24 @@ class Fish {
 
     get getSizeMax() {
         return this.size_range[1];
+    }
+
+    get getRandomSize() {
+        console.log("test");
+        let range = this.size_range[1]-this.size_range[0];
+        return (Math.floor(Math.random() * range)+this.size_range[0]);
+    }
+
+    get healingVal() {
+
+        let avg = (this.size_range[1]-this.size_range[0]) / 2;
+
+        function map_range(value, low1, high1, low2, high2) {
+            return low2 + (high2 - low2) * (value - low1) / (high1 - low1);
+        }
+        
+        // floor is 3 because automatically -1 from all passages
+        return Math.floor(map_range(avg, 3, 54, 1, 10));
     }
 
     get getZones() {

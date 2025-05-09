@@ -2,7 +2,7 @@ console.log('barter.js');
 
 window.getBarter = function(ip) {
 
-    if (isNumber(ip)) {
+    if (!isNumber(ip)) {
         ip = 0;
     }
 

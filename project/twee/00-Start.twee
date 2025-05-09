@@ -9,12 +9,18 @@ FISH
 <<set $hp to 80>>
 <<set $ip to 0>>
 <<set $num_casts to 0>>
+<<set $healing_val to 0>>
 
 :: Start
-
+<<script>>
+let loc = window.getLocation();
+State.variables.location = loc.name;
+State.variables.neighborhood = loc.neighborhood;
+State.variables.location_description = loc.desc;
+<</script>>
 Welcome.
 
-You are at $location, $location_description.
+You are at $location in $neighborhood. $location_description.
 
 You've come to the right place. You can go fishing here. 
 
@@ -26,25 +32,15 @@ You can [[enjoy the view.->00-Option-Enjoy-View]]
 
 You can <<link "cast a line.">><<script>>
 State.variables.num_casts++;
-function getRandomDigit() {
-  let num = Math.random();
-  return parseInt(String(num)[3]);
-}
 
-let digit = getRandomDigit();
+let rand = Math.floor(Math.random()*100); // 2digit random num
 
-console.log("random digit: "+digit);
+console.log("random rand: "+rand);
 
-if (digit < 1) {
+if (rand < 25) {
   Engine.play("01-Fish");
 } 
-// else if (digit >= 3 && digit < 5) {
-//   Engine.play("02-Eel");
-// } 
-// else if (digit >= 3 && digit < 4) {
-//   Engine.play("03-Oyster");
-// } 
-else if (digit >= 2 && digit < 10) {
+else {
   Engine.play("04-Trash");
 }
 
@@ -95,6 +91,37 @@ It's a perfect day to go fishing.
 
 <<include "00-Option-Cast-Line">>
 You can [[enjoy the view.->00-Option-Enjoy-View]]
+
+
+:: 00-Option-Follow
+
+You can <<link "follow the fish.">><<script>>
+
+let hasChanged = false;
+
+let location_options = ["the East River Esplanade", 
+  "Brooklyn Bridge Park", 
+  "the parking lot behind the Astoria Costco", 
+  "Queensbridge Park"]
+
+let location_descriptions = ["a small sliver where Manhattan lets you close to the water", 
+  "in the armpit of the Brooklyn Bridge, a beautiful secret view of the water",
+  "where you don't have to pack your own snacks",
+  "sharing space with frisbees, slack lines, and happy dogs"
+]
+
+while (hasChanged != true) {
+  let num = Math.floor(Math.random() * 3);
+  
+  if (location_options[num] != State.variables.location) {
+    State.variables.location = location_options[num];
+    State.variables.location_description = location_descriptions[num];
+    hasChanged = true;
+  }
+
+}
+Engine.play("Start");
+<</script>><</link>>
 
 
 :: 00-Option-Follow-Fish
@@ -193,9 +220,9 @@ Engine.play("Start");
 
 
 :: 00-Eat-It
-
-<div id="header-include"><<include "00-Header">></div>
+<<set $hp += $healing_val>>\
 <<set $ip += 1>>\
+<div id="header-include"><<include "00-Header">></div>
 <<script>>
 (function generate() {
 
@@ -221,4 +248,4 @@ $taste
 
 :: 00-Header
 <<if $num_casts > 1>><<set $hp -= 1>><</if>>\
-<span id="hp">HP: $hp / 100</span>         Fish eaten: $ip      <span id="restart"><<link "Restart">><<script>>Engine.restart()<</script>><</link>></span>
+<span id="hp">HP: $hp / 100</span>        <span id="eaten">Fish eaten: $ip</span>      <span id="location">Location: $location</span><span id="restart"><<link "Restart">><<script>>Engine.restart()<</script>><</link>></span>

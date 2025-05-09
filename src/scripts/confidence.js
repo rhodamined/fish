@@ -2,7 +2,7 @@ console.log('confidence.js');
 
 window.getConfidence = function(ip) {
 
-    if (isNumber(ip)) {
+    if (!isNumber(ip)) {
         ip = 0;
     }
 

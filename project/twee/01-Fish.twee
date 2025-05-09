@@ -5,7 +5,11 @@
 
   // fish object: see fish.js
   let fish = window.getFish(1);
+  State.variables.healing_val = fish.healingVal;
+  console.log(fish.healingVal);
   console.log(fish);
+  console.log("ip: " + State.variables.ip);
+  State.variables.fishtype = fish.getType;
 
   // add the government names (specific species)
   let fishnames = [fish.species];
@@ -16,10 +20,11 @@
     }
   }
 
-  // tracery template
+  // tracery template for fish description
   let sourceFish = {
-    "origin": "You reel in a #adjective# #fishtype# with #number# eyes and #number2# fins. \n\nIt #confidence# #fish.a#.",
+    "origin": "You reel in #adjective.a# #size#-inch #fishtype# with #number# eyes and #number2# fins. \n\nIt #confidence# #fish.a#.",
     "fishtype": [fish.getType],
+    "size": [fish.getRandomSize.toString()],
     "number": ["no", "two", "two", "two", "two", "two", "three", "four", "five", "an acceptable number of"],
     "number2": ["no", "two", "three", "four", "five", "six", "eight"],
     "confidence": [window.getConfidence(State.variables.ip)],
@@ -35,18 +40,16 @@
 
 
   // create text for fish begging for its life
-
   State.variables.change_location = false;
   State.variables.told_secret = false;
 
+  // process tags for special text options
   let barter = window.getBarter();
-  if (barter.charAt(0) == 'x') {
+  if (barter.charAt(0) == 'x') {  // x denotes 'follow fish'
     barter = barter.slice(1);
-    console.log("x: " + barter);
     State.variables.change_location = true;
-  } else if (barter.charAt(0) == 's') {
+  } else if (barter.charAt(0) == 's') { // s denotes 'secret'
     barter = barter.slice(1);
-    console.log("s: " + barter);
     State.variables.told_secret = true;
   }
 
