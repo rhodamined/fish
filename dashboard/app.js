@@ -33,4 +33,4 @@ async function refreshState() {
 }
 
 refreshState();
-setInterval(refreshState, 1000);
+setInterval(refreshState, 250);
