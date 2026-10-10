@@ -25,14 +25,27 @@ const state = createGameState(4);
     }
 	}, 1000);
 })();
+
 /*---------------------------*/
 /* SERVER                    */
 /*---------------------------*/
 
+// dist html for twee build
 app.get('/', async (req, res) => {
   console.log('get/');
   res.sendFile(__dirname + '/index.html');
 });
+
+// dashboard routes
+app.use('/', dashboardRouter);
+
+// app listen
+app.listen(port, () => {
+  console.log('listening on port ' + port);
+});
+
+
+/* ----- READ -----*/
 
 app.get('/state', async (req, res) => {
   res.json(state.getState());
@@ -47,11 +60,8 @@ app.get('/state/:fishNum', async (req, res) => {
   return res.json(fish);
 });
 
-app.use('/', dashboardRouter);
 
-app.listen(port, () => {
-  console.log('listening on port ' + port);
-});
+/* ----- WRITE -----*/
 
 // write current status; size; location
 app.post('/update/:fishNum/:status/:size/:location', async (req, res) => {
