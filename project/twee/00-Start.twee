@@ -33,12 +33,11 @@ You've come to the right place. You can go fishing here.
 
 <<updateWidget>>
 <<include "00-Option-Cast-Line">>
-You can [[enjoy the view.->00-Option-Enjoy-View]]
 
 
 :: 00-Option-Cast-Line
 
-You can <<link "cast a line.">><<script>>
+<<link "I'm hungry.">><<script>>
 
 function getRandomDigit() {
   let num = Math.random();
@@ -49,66 +48,17 @@ let digit = getRandomDigit();
 
 console.log(digit);
 
-if (digit < 3) {
+if (digit == 1) {
   Engine.play("01-Fish");
 } 
-else if (digit >= 3 && digit < 5) {
-  Engine.play("02-Eel");
-} 
-else if (digit >= 5 && digit < 6) {
-  Engine.play("03-Oyster");
-} 
-else if (digit >= 6 && digit < 10) {
+else if (digit == 2 || digit == 3) {
   Engine.play("04-Trash");
+} else {
+  Engine.play("02-Nothing");
 }
 
 <</script>>
 <</link>>
-
-
-
-:: 00-Option-Enjoy-View
-<<set $status to 'viewing'>>\
-<<script>>
-(function generate() {
-
-  let grammarWeatherSource = {
-    "origin": "The #sun# is #sunny#.",
-    "sun": ["sky", "sun", "water"],
-    "sunny": ["clouded over", "gentle", "sweet", "mildly upset", "reflects your mood", "too good to be true", "full of birds", "soft on your skin", "the thing that got you out of bed this morning"]
-  }
-
-  let grammarWeather = tracery.createGrammar(grammarWeatherSource);
-  // grammar.addModifiers(tracery.baseEngModifiers);
-  let weather = grammarWeather.flatten("#origin#");
-
-  console.log(weather);
-  State.variables.weather = weather;
-
-
-  let grammarTheViewSource = {
-    "origin": "You can see #view# from here.",
-    "view": ["Randall's Island", "Long Island City", "way too many birds", "Dumbo", "your shadow in the water", "a plane passing by", "dog walkers on the opposite coast", "two friends arguing in the distance", "the ferries chasing fish toward you", "the Queensboro Bridge", "the Williamsburg Bridge", "the Manhattan Bridge", "the Brooklyn Bridge", "the Newtown Creek", "a park bench to put your kit down"]
-  }
-
-  let grammarTheView = tracery.createGrammar(grammarTheViewSource);
-  // grammar.addModifiers(tracery.baseEngModifiers);
-  let view = grammarTheView.flatten("#origin#");
-
-  console.log(view);
-  State.variables.view = view;
-})();
-<</script>>\
-\
-$weather
-$view
-
-It's a perfect day to go fishing.
-
-<<updateWidget>>\
-<<include "00-Option-Cast-Line">>
-You can [[enjoy the view.->00-Option-Enjoy-View]]
-
 
 
 :: 00-Option-Follow-Fish
@@ -142,94 +92,3 @@ while (hasChanged != true) {
 Engine.play("00-Welcome");
 <</script>><</link>>
 
-
-
-:: 00-Option-Follow-Eel
-
-<<set $status to 'travelling'>>\
-You can <<link "follow the eel.">><<script>>
-
-let hasChanged = false;
-
-let location_options = ["the East River Esplanade", 
-  "Brooklyn Bridge Park", 
-  "the parking lot behind the Astoria Costco", 
-  "Queensbridge Park"]
-
-let location_descriptions = ["a small sliver where Manhattan lets you close to the water", 
-  "in the armpit of the Brooklyn Bridge, a beautiful secret view of the water",
-  "where you don't have to pack your own snacks",
-  "sharing space with frisbees, slack lines, and happy dogs"
-]
-
-while (hasChanged != true) {
-  let num = Math.floor(Math.random() * 3);
-  
-  if (location_options[num] != State.variables.location) {
-    State.variables.location = location_options[num];
-    State.variables.location_description = location_descriptions[num];
-    hasChanged = true;
-  }
-
-}
-Engine.play("00-Welcome");
-<</script>><</link>> 
-
-
-
-:: 00-Option-Follow-Oyster
-
-<<set $status to 'travelling'>>\
-You can <<link "follow the oyster.">><<script>>
-
-let hasChanged = false;
-
-let location_options = ["the East River Esplanade", 
-  "Brooklyn Bridge Park", 
-  "the parking lot behind the Astoria Costco", 
-  "Queensbridge Park"]
-
-let location_descriptions = ["a small sliver where Manhattan lets you close to the water", 
-  "in the armpit of the Brooklyn Bridge, but with a beautiful secret view of the water",
-  "where you don't have to pack your own snacks",
-  "sharing space with frisbees, slack lines, and happy dogs"
-]
-
-while (hasChanged != true) {
-  let num = Math.floor(Math.random() * 3);
-  
-  if (location_options[num] != State.variables.location) {
-    State.variables.location = location_options[num];
-    State.variables.location_description = location_descriptions[num];
-    hasChanged = true;
-  }
-
-}
-Engine.play("00-Welcome");
-<</script>><</link>>
-
-
-:: 00-Eat-It
-<<set $status to 'eating'>>\
-<<script>>
-(function generate() {
-
-  let sourceTaste = {
-    "origin": "It tasted like #adjective#. It was #adjective2# to eat.",
-    "adjective": ["sadness", "fish", "chicken", "tofu", "despair", "machine oil", "turpentine", "flowers", "chalk", "rubber", "celery", "potatoes", "the thready part of cilantro", "old times", "the future", "sadness"],
-    "adjective2": ["a joy", "brutal", "so sad", "a disappointment", "a treat", "a dream", "gut-wrenching", "tough", "time-consuming", "a bad idea", "necessary", "the right time"]
-  }
-  let grammar = tracery.createGrammar(sourceTaste);
-  let taste = grammar.flatten("#origin#");
-
-  State.variables.taste = taste;
-
-})();
-<</script>>\
-\
-You ate it.
-
-$taste
-
-<<updateWidget>>\
-<<include "00-Option-Cast-Line">>

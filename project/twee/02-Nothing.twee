@@ -1,0 +1,6 @@
+:: 02-Nothing
+<<set $status to 'not eating'>>\
+There's nothing here. 
+
+<<updateWidget>>
+<<include "00-Option-Cast-Line">>

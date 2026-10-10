@@ -1,4 +1,5 @@
 :: 04-Trash
+<<set $status to 'thinking'>>\
 <<script>>
 (function generate() {
 
@@ -20,6 +21,7 @@
 \
 $trash
 
-You can't eat this.
 
-<<include "00-Option-Cast-Line">>
+Is this food?
+[[Yes->05-Eating]]
+[[No->05-Not-Eating]]
