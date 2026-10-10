@@ -4,11 +4,25 @@ FISH
 :: StoryInit
 
 /* Init global variables */\
+<<set $fish to 0>>
+<<set $size to 3>>
+<<set $status to 'init'>>
 <<set $location to 'the East River Esplanade'>>
 <<set $location_description to 'a small sliver where Manhattan lets you close to the water'>>
 
 
 :: Start
+
+Thanks for testing FISH with us!
+
+Which fish are you? 
+
+<<link "Fish 1" "00-Welcome">><<set $fish to 1>><</link>> 
+<<link "Fish 2" "00-Welcome">><<set $fish to 2>><</link>>
+<<link "Fish 3" "00-Welcome">><<set $fish to 3>><</link>>
+<<link "Fish 4" "00-Welcome">><<set $fish to 4>><</link>>
+
+:: 00-Welcome
 
 Welcome.
 
@@ -16,6 +30,7 @@ You are at $location, $location_description.
 
 You've come to the right place. You can go fishing here. 
 
+<<updateWidget>>
 <<include "00-Option-Cast-Line">>
 You can [[enjoy the view.->00-Option-Enjoy-View]]
 

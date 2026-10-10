@@ -1,0 +1,12 @@
+:: 99-UpdateWidget [widget]
+<<widget "updateWidget">>\
+  <<nobr>>
+    <<script>>
+    (async function() {
+      let sv = State.variables;
+      console.log('updateWidget: fishnum: ' + sv.fish + ' status: ' + sv.status + ' size: ' + sv.size + ' location: ' + sv.location);
+      await window.updateFish(sv.fish, sv.status, sv.size, sv.location);
+    })();
+    <</script>>
+  <</nobr>>
+<</widget>>\
