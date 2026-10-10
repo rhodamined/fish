@@ -3,6 +3,18 @@ dist/*.html
 #*.json
 
 
+# Hidden
+.venv
+.env
+/old
+
+
+# Data
+/data
+keys
+save.json
+/archive
+
 # Environment
 .DS_Store
 *.code-workspace
