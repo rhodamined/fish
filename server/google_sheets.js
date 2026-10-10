@@ -40,19 +40,20 @@ async function writeStateToGSheet(state) {
   // const c6 = sheet.getCellByA1('C6'); // or A1 style notation
   
   for (let i = 0; i < state.length; i++) {
-      const row = i + 1; 
+      const fish = state[i];
+      const row = i + 1;
+
+      if (!fish) continue;
 
       const fishCell = sheet.getCell(row, 0);
       const statusCell = sheet.getCell(row, 1);
       const sizeCell = sheet.getCell(row, 2);
       const locationCell = sheet.getCell(row, 3);
 
-      if (state[row]) {
-        fishCell.value = state[i].fish;
-        statusCell.value = state[i].status;
-        sizeCell.value = state[i].size;
-        locationCell.value = state[i].location; 
-      }
+      fishCell.value = fish.fish;
+      statusCell.value = fish.status;
+      sizeCell.value = fish.size;
+      locationCell.value = fish.location;
     }
 
   // // access everything about the cell

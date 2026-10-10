@@ -1,0 +1,70 @@
+:root {
+  --bg: #000000;
+  --fg: #ffffff;
+  --muted: rgba(255, 255, 255, 0.75);
+  --border: rgba(255, 255, 255, 0.25);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(220px, 1fr));
+  grid-template-rows: repeat(2, minmax(220px, 1fr));
+  width: 100vw;
+  height: 100vh;
+  background: var(--bg);
+}
+
+.quadrant {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  padding: 24px;
+  text-align: center;
+  background: var(--bg);
+}
+
+.fish-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  width: 100%;
+}
+
+.fish-name {
+  font-size: clamp(1.1rem, 2vw, 2rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.fish-status,
+.fish-size,
+.fish-location {
+  font-size: clamp(0.9rem, 1.4vw, 1.5rem);
+  color: var(--fg);
+}
+
+.fish-status {
+  color: var(--muted);
+}

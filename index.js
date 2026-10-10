@@ -3,33 +3,26 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const app = express(); // init express app
-const port = process.env.PORT || 3003; 
+const port = process.env.PORT || 3003;
 
 app.use(express.static('dist'));
 app.use(bodyParser.json());
 
-// database 
+// database
 const sheets = require('./server/google_sheets');
+const dashboardRouter = require('./server/dashboard');
+const { createGameState } = require('./server/state');
 
 // game state
-// in format of [{status, size, location}] for each fish, where index is the fish 1-4
-let state = [{}, {}, {}, {}]; // initialize state for 4 fish; index 0 stays blank
-let hasStateHasChanged = false; // flag to track if state has changed since last write to Google Sheets
+const state = createGameState(4);
 
-
-// IIFE: UPDATING
-// On spin up, ping gsheet and pull entire gamestate every 2 seconds
 (async function () {
-
 	setInterval(async function () {
-    // console.log('interval');
-
-    if (hasStateHasChanged) {
+    if (state.hasChanged()) {
       console.log('state has changed, writing to gsheet');
-      await sheets.writeStateToGSheet(state);
-      hasStateHasChanged = false; // reset flag after writing to gsheet
+      await sheets.writeStateToGSheet(state.getState());
+      state.clearDirty();
     }
-
 	}, 1000);
 })();
 /*---------------------------*/
@@ -41,30 +34,41 @@ app.get('/', async (req, res) => {
   res.sendFile(__dirname + '/index.html');
 });
 
+app.get('/state', async (req, res) => {
+  res.json(state.getState());
+});
+
+app.get('/state/:fishNum', async (req, res) => {
+  const fish = state.getFish(req.params.fishNum);
+  if (!fish) {
+    return res.status(404).json({ error: 'Fish not found' });
+  }
+
+  return res.json(fish);
+});
+
+app.use('/', dashboardRouter);
+
 app.listen(port, () => {
   console.log('listening on port ' + port);
 });
 
-
-
 // write current status; size; location
 app.post('/update/:fishNum/:status/:size/:location', async (req, res) => {
-  
-  let fishNum = req.params.fishNum;
-  let status = req.params.status;
-  let size = parseInt(req.params.size);
-  let location = req.params.location;
+  const fishNum = Number(req.params.fishNum);
+  const status = req.params.status;
+  const size = Number.parseInt(req.params.size, 10);
+  const location = req.params.location;
+
   console.log('index.js /update fishNum: ' + fishNum + ' status: ' + status + ' size: ' + size + ' location: ' + location);
 
-  // update state
-  state[fishNum-1] = {
+  const updatedFish = state.updateFish(fishNum, {
     fish: fishNum,
-    status: status,
-    size: size,
-    location: location
-  };
+    status,
+    size: Number.isFinite(size) ? size : 0,
+    location
+  });
 
-  hasStateHasChanged = true; // set flag to indicate state has changed
-  console.log(state);
+  console.log(updatedFish);
   res.send('Success: updated ' + status + ': ' + size + ' - ' + location);
 });

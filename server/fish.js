@@ -4,7 +4,7 @@ class Fish {
 	constructor({ status = 'none', size = 0, location = 'none' } = {}) {
 		this._status = status
 		this._size = size
-		this._location = { ...location }
+		this._location = typeof location === 'string' ? location : 'none'
 	}
 
 	// Updaters
