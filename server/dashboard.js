@@ -5,6 +5,7 @@ const router = express.Router();
 const dashboardDir = path.join(__dirname, '../dashboard');
 const fishDashboardDir = path.join(__dirname, '../dashboard-fish');
 const locationDashboardDir = path.join(__dirname, '../dashboard-location');
+const foodDashboardDir = path.join(__dirname, '../dashboard-food');
 
 router.get('/dashboard', (req, res) => {
   res.sendFile(path.join(dashboardDir, 'index.html'));
@@ -48,6 +49,22 @@ router.get('/dashboard-location/app.js', (req, res) => {
 
 router.get('/dashboard-location/src/:file', (req, res) => {
   res.sendFile(path.join(locationDashboardDir, 'src', decodeURIComponent(req.params.file)));
+});
+
+router.get('/dashboard-food', (req, res) => {
+  res.sendFile(path.join(foodDashboardDir, 'index.html'));
+});
+
+router.get('/dashboard-food/styles.css', (req, res) => {
+  res.sendFile(path.join(foodDashboardDir, 'styles.css'));
+});
+
+router.get('/dashboard-food/app.js', (req, res) => {
+  res.sendFile(path.join(foodDashboardDir, 'app.js'));
+});
+
+router.get('/dashboard-food/src/:file', (req, res) => {
+  res.sendFile(path.join(foodDashboardDir, 'src', decodeURIComponent(req.params.file)));
 });
 
 module.exports = router;

@@ -16,19 +16,38 @@ function getLocationImagePath(label) {
   return `/dashboard-location/src/${encodeURIComponent(match.file)}`;
 }
 
-function setLocationHighlight(activeLocation) {
-  const normalizedActive = typeof activeLocation === 'string' ? activeLocation.trim() : '';
+function updateQuadrant(quadrant, fish) {
+  const fishNumber = Number(fish?.fish ?? quadrant.dataset.fish ?? 0);
+  const location = typeof fish?.location === 'string' ? fish.location.trim() : '';
+  const hasLocation = Boolean(location) && location !== 'none';
+  const img = quadrant.querySelector('.location-image');
+  const labelEl = quadrant.querySelector('.location-label');
 
-  quadrantEls.forEach((el) => {
-    const isActive = el.dataset.location === normalizedActive;
-    el.classList.toggle('active', isActive);
-    const img = el.querySelector('.location-image');
-    const label = el.dataset.location;
-    const imagePath = getLocationImagePath(label);
+  quadrant.classList.toggle('active', hasLocation);
+  quadrant.classList.toggle('empty', !hasLocation);
 
-    if (imagePath && img.getAttribute('src') !== imagePath) {
-      img.setAttribute('src', imagePath);
-    }
+  if (!hasLocation) {
+    img.removeAttribute('src');
+    img.setAttribute('alt', '');
+    labelEl.textContent = '';
+    return;
+  }
+
+  const imagePath = getLocationImagePath(location);
+  if (imagePath) {
+    img.setAttribute('src', imagePath);
+  }
+  img.setAttribute('alt', location);
+  labelEl.textContent = `Fish ${fishNumber}: ${location}`;
+}
+
+function setLocationState(fishState) {
+  quadrantEls.forEach((quadrant) => {
+    const fishNumber = Number(quadrant.dataset.fish || 0);
+    const fish = fishState.find((entry) => Number(entry.fish) === fishNumber)
+      || { fish: fishNumber, location: 'none' };
+
+    updateQuadrant(quadrant, fish);
   });
 }
 
@@ -40,17 +59,12 @@ async function refreshState() {
     }
 
     const fishState = await response.json();
-    const allLocations = fishState
-      .map((fish) => fish && fish.location)
-      .filter((location) => typeof location === 'string' && location && location !== 'none');
-
-    const activeLocation = allLocations[0] || locationMap[0].label;
-    setLocationHighlight(activeLocation);
+    setLocationState(Array.isArray(fishState) ? fishState : []);
   } catch (error) {
     console.error('Location dashboard refresh failed:', error);
-    setLocationHighlight(locationMap[0].label);
+    setLocationState([]);
   }
 }
 
 refreshState();
-setInterval(refreshState, 1000);
+setInterval(refreshState, 250);
