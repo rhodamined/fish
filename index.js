@@ -8,7 +8,7 @@ const port = process.env.PORT || 3003;
 app.use(express.static('dist'));
 app.use(bodyParser.json());
 
-const StateMachine = require('./server/state');
+const sheets = require('./server/google_sheets');
 
 /*---------------------------*/
 /* SERVER                    */

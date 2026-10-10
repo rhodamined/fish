@@ -24,6 +24,7 @@ Which fish are you?
 
 :: 00-Welcome
 
+<<set $status to 'welcome'>>\
 Welcome.
 
 You are at $location, $location_description.
@@ -67,6 +68,7 @@ else if (digit >= 6 && digit < 10) {
 
 
 :: 00-Option-Enjoy-View
+<<set $status to 'viewing'>>\
 <<script>>
 (function generate() {
 
@@ -111,6 +113,7 @@ You can [[enjoy the view.->00-Option-Enjoy-View]]
 
 :: 00-Option-Follow-Fish
 
+<<set $status to 'travelling'>>\
 You can <<link "follow the fish.">><<script>>
 
 let hasChanged = false;
@@ -136,13 +139,14 @@ while (hasChanged != true) {
   }
 
 }
-Engine.play("Start");
+Engine.play("Welcome");
 <</script>><</link>>
 
 
 
 :: 00-Option-Follow-Eel
 
+<<set $status to 'travelling'>>\
 You can <<link "follow the eel.">><<script>>
 
 let hasChanged = false;
@@ -168,13 +172,14 @@ while (hasChanged != true) {
   }
 
 }
-Engine.play("Start");
+Engine.play("Welcome");
 <</script>><</link>> 
 
 
 
 :: 00-Option-Follow-Oyster
 
+<<set $status to 'travelling'>>\
 You can <<link "follow the oyster.">><<script>>
 
 let hasChanged = false;
@@ -200,11 +205,12 @@ while (hasChanged != true) {
   }
 
 }
-Engine.play("Start");
+Engine.play("Welcome");
 <</script>><</link>>
 
 
 :: 00-Eat-It
+<<set $status to 'eating'>>\
 <<script>>
 (function generate() {
 
