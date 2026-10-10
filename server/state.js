@@ -88,6 +88,20 @@ function createGameState(totalFish = 4) {
       return this.getState();
     },
 
+    resetToDefaults() {
+      for (let index = 0; index < slotCount; index += 1) {
+        state[index] = normalizeFishRecord({
+          fish: index + 1,
+          status: 'none',
+          size: 0,
+          location: 'none'
+        }, index);
+      }
+
+      hasChanged = true;
+      return this.getState();
+    },
+
     hasChanged() {
       return hasChanged;
     },

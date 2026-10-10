@@ -1,7 +1,23 @@
 :: 05-Eating
-<<set $status to 'eating'>>
-<<set $size to $size + 1>>
-It was delicious / terrible / exquisite / disgusting / fine / not bad / not good. 
+<<set $status to 'eating'>>\
+<<set $size to $size + 1>>\
+<<script>>
+(function generate() {
+
+  let sourceTaste = {
+    "origin": "It was #description# to eat.",
+    "description": ["delicious", "terrible", "exquisite", "an ordeal", "heart-wrenching", "so quick", "slippery", "dissatisfying"]
+  }
+  let grammar = tracery.createGrammar(sourceTaste);
+  // grammar.addModifiers(tracery.baseEngModifiers);
+  let taste = grammar.flatten("#origin#");
+
+  State.variables.taste = taste;
+
+})();
+<</script>>\
+\
+$taste
 
 <<updateWidget>>\
 <<link "I'm still hungry.">>\

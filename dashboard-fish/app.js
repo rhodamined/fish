@@ -7,7 +7,8 @@ function getFishVideoPath(fishNumber) {
 
 function getScaleFromSize(size) {
   const numericSize = Number(size) || 0;
-  return Math.min(2.2, Math.max(0.5, 0.7 + numericSize / 10));
+  const growthFactor = Math.max(0, numericSize / 23.5);
+  return Math.min(3.4, Math.max(0.5, 0.7 + growthFactor * 2.4));
 }
 
 function getRippleScale(size) {

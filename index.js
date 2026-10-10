@@ -17,6 +17,14 @@ const { createGameState } = require('./server/state');
 const state = createGameState(4);
 
 (async function () {
+  try {
+    state.resetToDefaults();
+    await sheets.writeStateToGSheet(state.getState());
+    console.log('game state initialized to default values and synced to Google Sheets');
+  } catch (error) {
+    console.error('Unable to sync default game state to Google Sheets on startup:', error.message);
+  }
+
 	setInterval(async function () {
     if (state.hasChanged()) {
       console.log('state has changed, writing to gsheet');
@@ -58,6 +66,22 @@ app.get('/state/:fishNum', async (req, res) => {
   }
 
   return res.json(fish);
+});
+
+app.post('/reset-state', async (req, res) => {
+  const resetState = state.resetToDefaults();
+
+  try {
+    await sheets.writeStateToGSheet(resetState);
+    res.json({ ok: true, state: resetState });
+  } catch (error) {
+    console.error('Failed to reset game state in Google Sheets:', error.message);
+    res.status(500).json({ ok: false, error: 'Reset failed' });
+  }
+});
+
+app.post('/reset', async (req, res) => {
+  return res.redirect(307, '/reset-state');
 });
 
 
