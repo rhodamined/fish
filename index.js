@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 app.get('/', async (req, res) => {
   // for whatever reason this isn't working?
   console.log('get/');
-  res.sendFile(__dirname + 'index.html');
+  res.sendFile(__dirname + '/index.html');
 });
 
 app.listen(port, () => {
