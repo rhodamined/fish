@@ -32,33 +32,11 @@ You are at $location, $location_description.
 You've come to the right place. You can go fishing here. 
 
 <<updateWidget>>
-<<include "00-Option-Cast-Line">>
+<<link "I'm hungry.">>\
+  <<needFood>>
+<</link>>\
 
 
-:: 00-Option-Cast-Line
-
-<<link "I'm hungry.">><<script>>
-
-function getRandomDigit() {
-  let num = Math.random();
-  return parseInt(String(num)[3]);
-}
-
-let digit = getRandomDigit();
-
-console.log(digit);
-
-if (digit == 1) {
-  Engine.play("01-Fish");
-} 
-else if (digit == 2 || digit == 3) {
-  Engine.play("04-Trash");
-} else {
-  Engine.play("02-Nothing");
-}
-
-<</script>>
-<</link>>
 
 
 :: 00-Option-Follow-Fish

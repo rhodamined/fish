@@ -55,8 +55,10 @@
         "doomed, and you will be too",
         "working on myself",
         "not special"],
-    "barter": ["I'll tell you a secret", "I'll show you a better place to fish", "you'll never see me again", "I'll show you where my enemies are", "I'll be better"]
-  }
+    // "barter": ["I'll tell you a secret", "I'll show you a better place to fish", "you'll never see me again", "I'll show you where my enemies are", "I'll be better"]
+    "barter": ["I'll show you a better place to fish", "I'll show you where my enemies are"]
+
+}
 
   grammar = tracery.createGrammar(sourcePleading);
   let plea = grammar.flatten("#origin#");
@@ -82,6 +84,5 @@ $fish
 $plea
 
 
-You can [[eat this.->00-Eat-It]]
+You can [[eat this.->05-Eating]]
 <<if $change_location is true>><<include "00-Option-Follow-Fish">><br><</if>>\
-<<include "00-Option-Cast-Line">>

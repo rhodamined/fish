@@ -38,5 +38,6 @@ $view
 It's a perfect day to go fishing.
 
 <<updateWidget>>\
-<<include "00-Option-Cast-Line">>
-You can [[enjoy the view.->00-Option-Enjoy-View]]
+<<link "I'm hungry.">>\
+  <<needFood>>
+<</link>>\

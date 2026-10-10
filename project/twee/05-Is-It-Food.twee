@@ -1,10 +1,18 @@
 :: 05-Eating
 <<set $status to 'eating'>>
+<<set $size to $size + 1>>
 It was delicious / terrible / exquisite / disgusting / fine / not bad / not good. 
 
-[[I'm still hungry.->00-Option-Cast-Line]]
+<<updateWidget>>\
+<<link "I'm still hungry.">>\
+  <<needFood>>
+<</link>>\
 
 :: 05-Not-Eating
 <<set $status to 'not eating'>>
 
-[[I'm so so hungry.->00-Option-Cast-Line]]
+<<updateWidget>>\
+<<link "I'm so so hungry.">>\
+  <<needFood>>
+<</link>>\
+

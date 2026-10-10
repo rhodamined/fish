@@ -10,3 +10,31 @@
     <</script>>
   <</nobr>>
 <</widget>>\
+
+
+
+:: 99-NeedFood [widget]
+<<widget "needFood">>\
+  <<nobr>>
+    <<script>>
+      function getRandomDigit() {
+        let num = Math.random();
+        return parseInt(String(num)[3]);
+      }
+
+      let digit = getRandomDigit();
+
+      console.log(digit);
+
+      if (digit == 1) {
+        Engine.play("01-Fish");
+      } 
+      else if (digit == 2 || digit == 3) {
+        Engine.play("04-Trash");
+      } else {
+        Engine.play("02-Nothing");
+      }
+
+    <</script>>
+  <</nobr>>
+<</widget>>\
