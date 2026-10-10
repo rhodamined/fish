@@ -4,7 +4,7 @@ FISH
 :: StoryInit
 
 /* Init global variables */\
-<<set $fish to 0>>
+<<set $fishNum to 0>>
 <<set $size to 3>>
 <<set $status to 'init'>>
 <<set $location to 'the East River Esplanade'>>
@@ -17,10 +17,10 @@ Thanks for testing FISH with us!
 
 Which fish are you? 
 
-<<link "Fish 1" "00-Welcome">><<set $fish to 1>><</link>> 
-<<link "Fish 2" "00-Welcome">><<set $fish to 2>><</link>>
-<<link "Fish 3" "00-Welcome">><<set $fish to 3>><</link>>
-<<link "Fish 4" "00-Welcome">><<set $fish to 4>><</link>>
+<<link "Fish 1" "00-Welcome">><<set $fishNum to 1>><</link>> 
+<<link "Fish 2" "00-Welcome">><<set $fishNum to 2>><</link>>
+<<link "Fish 3" "00-Welcome">><<set $fishNum to 3>><</link>>
+<<link "Fish 4" "00-Welcome">><<set $fishNum to 4>><</link>>
 
 :: 00-Welcome
 
@@ -105,7 +105,7 @@ $view
 
 It's a perfect day to go fishing.
 
-
+<<updateWidget>>\
 <<include "00-Option-Cast-Line">>
 You can [[enjoy the view.->00-Option-Enjoy-View]]
 
@@ -139,7 +139,7 @@ while (hasChanged != true) {
   }
 
 }
-Engine.play("Welcome");
+Engine.play("00-Welcome");
 <</script>><</link>>
 
 
@@ -172,7 +172,7 @@ while (hasChanged != true) {
   }
 
 }
-Engine.play("Welcome");
+Engine.play("00-Welcome");
 <</script>><</link>> 
 
 
@@ -205,7 +205,7 @@ while (hasChanged != true) {
   }
 
 }
-Engine.play("Welcome");
+Engine.play("00-Welcome");
 <</script>><</link>>
 
 
@@ -231,4 +231,5 @@ You ate it.
 
 $taste
 
+<<updateWidget>>\
 <<include "00-Option-Cast-Line">>

@@ -12,13 +12,67 @@ const FISH_SHEETID = process.env.FISH_SHEETID;
 
 
 async function testServiceAccountAuth() {
-
   const serviceAccountAuth = await google_auth.getAccessTokenFromImpersonatedCredentials();
   console.log(serviceAccountAuth.token); // prints the access token
 
+  await doc.loadInfo(); // loads document properties and worksheets
+  // console.log(doc.title);
+
+  // read rows
+  const sheet = doc.sheetsByIndex[0]; // or use `doc.sheetsById[id]` or `doc.sheetsByTitle[title]`
+  const rows = await sheet.getRows(); // can pass in { limit, offset }
+  console.log(rows);
+}
+
+
+async function writeStateToGSheet(state) {
+  const serviceAccountAuth = await google_auth.getAccessTokenFromImpersonatedCredentials();
+  const doc = new GoogleSpreadsheet(FISH_SHEETID, serviceAccountAuth); // pass in the access token
+
+  await doc.loadInfo(); // loads document properties and worksheets
+  const sheet = doc.sheetsByIndex[0]; // or use `doc.sheetsById[id]` or `doc.sheetsByTitle[title]`
+
+  await sheet.loadCells('A1:E10'); // loads range of cells into local cache - DOES NOT RETURN THE CELLS
+  // console.log(sheet.cellStats); // total cells, loaded, how many non-empty
+  
+  // // example
+  // const a1 = sheet.getCell(0, 0); // access cells using a zero-based index
+  // const c6 = sheet.getCellByA1('C6'); // or A1 style notation
+  
+  for (let i = 0; i < state.length; i++) {
+      const row = i + 1; 
+
+      const fishCell = sheet.getCell(row, 0);
+      const statusCell = sheet.getCell(row, 1);
+      const sizeCell = sheet.getCell(row, 2);
+      const locationCell = sheet.getCell(row, 3);
+
+      if (state[row]) {
+        fishCell.value = state[i].fish;
+        statusCell.value = state[i].status;
+        sizeCell.value = state[i].size;
+        locationCell.value = state[i].location; 
+      }
+    }
+
+  // // access everything about the cell
+  // console.log(a1.value);
+  // console.log(a1.formula);
+  // console.log(a1.formattedValue);
+
+  // // update the cell contents and formatting
+  // a1.value = 123.456;
+  // c6.formula = '=A1';
+  // a1.textFormat = { bold: true };
+  // c6.note = 'This is a note!';
+  await sheet.saveUpdatedCells(); // save all updates in one call
 }
 
 // test
 // (async () => {
 //   await testServiceAccountAuth();
 // })();
+
+module.exports = {
+  writeStateToGSheet
+}
