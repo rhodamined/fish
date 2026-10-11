@@ -58,6 +58,10 @@ img {
   background: #000;
 }
 
+.fish-choice-video::-webkit-media-controls {
+  display: none !important;
+}
+
 .fish-trash-scene {
   position: relative;
   width: min(100%, 520px);
