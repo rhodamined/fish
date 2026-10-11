@@ -39,6 +39,7 @@ img {
   max-width: 560px;
   margin-top: 1rem;
   margin-right: auto;
+  margin-left : 0;  
 }
 
 .fish-choice {
