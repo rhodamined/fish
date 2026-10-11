@@ -2,6 +2,24 @@
 <<set $status to 'not eating'>>\
 There's nothing here. 
 
+<<include "06-Your-Fish">>\ 
+<<script>>
+(function generate() {
+
+  let sourceTaste = {
+    "origin": "Your fish says something like:  #description#",
+    "description": ["fuck I'm so hungry!", "nothing again??", "I'm going to throw a fit.", "I'm going to file a complaint if this doesn't change soon.", "please... I might starve...", "are we looking in the wrong place?", "Did you know that I'm hungry?", "ME HUNGRY!!!!!!"]
+  }
+  let grammar = tracery.createGrammar(sourceTaste);
+  // grammar.addModifiers(tracery.baseEngModifiers);
+  let taste = grammar.flatten("#origin#");
+
+  State.variables.taste = taste;
+
+})();
+<</script>>\
+
+No worries. Let's keep going: 
 <<updateWidget>>
 <<link "I'm hungry.">>\
   <<needFood>>

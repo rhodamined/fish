@@ -1,10 +1,35 @@
 :: 06-Design
 
-Thanks for testing FISH with us!
+Choose your fish: 
 
-Which fish are you? 
+<div class="fish-selection">
+  <div class="fish-choice">
+    <video class="fish-choice-video" src="/dashboard-fish/src/fish-1.mp4" muted autoplay loop playsinline aria-label="Fish 1"></video>
+    <<link "Choose fish 1" "00-Welcome">><<set $fishNum to 1>><</link>>
+  </div>
+  <div class="fish-choice">
+    <video class="fish-choice-video" src="/dashboard-fish/src/fish-2.mp4" muted autoplay loop playsinline aria-label="Fish 2"></video>
+    <<link "Choose fish 2" "00-Welcome">><<set $fishNum to 2>><</link>>
+  </div>
+  <div class="fish-choice">
+    <video class="fish-choice-video" src="/dashboard-fish/src/fish-3.mp4" muted autoplay loop playsinline aria-label="Fish 3"></video>
+    <<link "Choose fish 3" "00-Welcome">><<set $fishNum to 3>><</link>>
+  </div>
+  <div class="fish-choice">
+    <video class="fish-choice-video" src="/dashboard-fish/src/fish-4.mp4" muted autoplay loop playsinline aria-label="Fish 4"></video>
+    <<link "Choose fish 4" "00-Welcome">><<set $fishNum to 4>><</link>>
+  </div>
+</div>
 
-<<link "Fish 1" "00-Welcome">><<set $fishNum to 1>><</link>> 
-<<link "Fish 2" "00-Welcome">><<set $fishNum to 2>><</link>>
-<<link "Fish 3" "00-Welcome">><<set $fishNum to 3>><</link>>
-<<link "Fish 4" "00-Welcome">><<set $fishNum to 4>><</link>>
+:: 06-Your-Fish
+
+<<if $fishNum == 1>>\
+<video class="fish-choice-video" src="/dashboard-fish/src/fish-1.mp4" controls muted autoplay loop playsinline aria-label="Your fish"></video>
+<<elseif $fishNum == 2>>\  
+<video class="fish-choice-video" src="/dashboard-fish/src/fish-2.mp4" controls muted autoplay loop playsinline aria-label="Your fish"></video>
+<<elseif $fishNum == 3>>\       
+<video class="fish-choice-video" src="/dashboard-fish/src/fish-3.mp4" controls muted autoplay loop playsinline aria-label="Your fish"></video>
+<<elseif $fishNum == 4>>\       
+<video class="fish-choice-video" src="/dashboard-fish/src/fish-4.mp4" controls muted autoplay loop playsinline aria-label="Your fish"></video>
+<</if>>\
+

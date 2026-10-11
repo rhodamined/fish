@@ -16,22 +16,20 @@ FISH
 
 Thanks for testing FISH with us!
 
-Which fish are you? 
-
-<<link "Fish 1" "00-Welcome">><<set $fishNum to 1>><</link>> 
-<<link "Fish 2" "00-Welcome">><<set $fishNum to 2>><</link>>
-<<link "Fish 3" "00-Welcome">><<set $fishNum to 3>><</link>>
-<<link "Fish 4" "00-Welcome">><<set $fishNum to 4>><</link>>
+<<include [[06-Design]]>>\
 
 :: 00-Welcome
 
 <<set $status to 'welcome'>>\
-You are born! Congrats! 
+
+You are born! Congrats! Look at you: 
+<<include "06-Your-Fish">>\
 
 You are swimming around...very cool. 
 
-You are feeling something, ... 
-
+You are feeling something, ... hm...
+something, indescribable. 
+Actually, you can describe it: 
 <<updateWidget>>
 <<link "I'm hungry.">>\
   <<needFood>>
@@ -70,4 +68,3 @@ while (hasChanged != true) {
 }
 Engine.play("00-Welcome");
 <</script>><</link>>
-

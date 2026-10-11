@@ -1,6 +1,8 @@
 :: 05-Eating
 <<set $status to 'eating'>>\
 <<set $size to $size + 1>>\
+<<include "06-Your-Fish">>\
+
 <<script>>
 (function generate() {
 
@@ -26,9 +28,9 @@ $taste
 
 :: 05-Not-Eating
 <<set $status to 'not eating'>>
+<<include "06-Your-Fish">>\
 
 <<updateWidget>>\
 <<link "I'm so so hungry.">>\
   <<needFood>>
 <</link>>\
-

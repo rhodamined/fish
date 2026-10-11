@@ -2,13 +2,13 @@
 <<set $status to 'thinking'>>\
 <<script>>
 (function generate() {
-  const trashType = ["bike wheel", "plastic bottle", "can of Sprite", "hoof of a dead horse", "hubcap", "metal detector", "beer bottle", "beer can", "styrofoam takeout container", "bamboo plant", "broken flower pot", "plastic bag", "plastic bag", "plastic bag", "plastic bag", "plastic bag", "plastic bag", "plastic bottle", "saran wrapper", "Gatorade bottle", "cigarette box", "dog toy", "tennis ball", "bottle that used to hold tennis balls", "tennis racket", "Nalgene bottle", "old book", "pair of headphones", "single airpod", "Scissors", "Syringe", "Rusty nails", "Lettuce", "Lox bagel", "Bikini bottoms", "Wraparound sunglasses", "A bag of Marshmallows", "A playbill", "Shard of glass", "A 7-11 Slurpee", "Pint of Ben n Jerrys Phish Food", "A can of Fancy Feast", "Chopped Cheese in tinfoil", "Sneakers", "A funhouse mirror that makes you really looooong", "A grand piano", "CitiBike", "Umbilical cord"];
+  const trashType = ["bike wheel", "plastic bottle", "can of Sprite", "hoof of a dead horse", "hubcap", "metal detector", "beer bottle", "beer can", "styrofoam takeout container", "bamboo plant", "broken flower pot", "plastic bag", "plastic bag", "plastic bag", "plastic bag", "plastic bag", "plastic bag", "plastic bottle", "saran wrapper", "Gatorade bottle", "cigarette box", "dog toy", "tennis ball", "bottle that used to hold tennis balls", "tennis racket", "Nalgene bottle", "old book", "single airpod", "Scissors", "Syringe", "Rusty nails", "Lettuce", "Lox bagel", "Bikini bottoms", "Wraparound sunglasses", "A bag of Marshmallows", "A playbill", "Shard of glass", "A 7-11 Slurpee", "Pint of Ben n Jerrys Phish Food", "A can of Fancy Feast", "Chopped Cheese in tinfoil", "Sneakers", "A funhouse mirror that makes you really looooong", "A grand piano", "CitiBike", "Umbilical cord"];
 
   const fishNum = Number(State.variables.fishNum || 1);
   const randomTrash = trashType[Math.floor(Math.random() * trashType.length)];
   const number = ["3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "15", "50", "73", "99", "102"][Math.floor(Math.random() * 15)];
   const time = ["weeks", "months", "years", "decades"][Math.floor(Math.random() * 4)];
-  const sentence = `You reel in a ${randomTrash}. It's probably been in the river for ${number} ${time}.`;
+  const sentence = `You reel in a ${randomTrash}.`;
 
   State.variables.trash = randomTrash;
   State.variables.trashSentence = sentence;
@@ -27,6 +27,11 @@
 <</script>>\
 \
 $trash
+<div class="fish-trash-scene">\
+  <div class="fish-trash-image">\
+    <<trash>>\
+  </div>\
+</div>\
 
 Is this food?
 [[Yes->05-Eating]]

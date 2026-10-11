@@ -38,3 +38,91 @@
     <</script>>
   <</nobr>>
 <</widget>>\
+
+:: 99-Trash [widget]
+<<widget "trash">>\
+  /* #sym:getTrashImagePath */\
+  <<set _trashImagePath to "">>\
+  <<if $trash == "bike wheel">>\
+    <<set _trashImagePath to "/dashboard-food/src/bike%20wheel.png">>\
+  <<elseif $trash == "plastic bottle">>\
+    <<set _trashImagePath to "/dashboard-food/src/plastic%20bottle.jpeg">>\
+  <<elseif $trash == "can of Sprite">>\
+    <<set _trashImagePath to "/dashboard-food/src/can%20of%20Sprite.png">>\
+  <<elseif $trash == "hoof of a dead horse">>\
+    <<set _trashImagePath to "/dashboard-food/src/hoof%20of%20a%20dead%20horse.jpeg">>\
+  <<elseif $trash == "hubcap">>\
+    <<set _trashImagePath to "/dashboard-food/src/hubcap.jpg">>\
+  <<elseif $trash == "metal detector">>\
+    <<set _trashImagePath to "/dashboard-food/src/metal%20detector.jpeg">>\
+  <<elseif $trash == "beer bottle">>\
+    <<set _trashImagePath to "/dashboard-food/src/beer%20bottle.jpg">>\
+  <<elseif $trash == "beer can">>\
+    <<set _trashImagePath to "/dashboard-food/src/beer%20can.png">>\
+  <<elseif $trash == "styrofoam takeout container">>\
+    <<set _trashImagePath to "/dashboard-food/src/styrofoam%20takeout%20container.jpeg">>\
+  <<elseif $trash == "bamboo plant">>\
+    <<set _trashImagePath to "/dashboard-food/src/bamboo%20plant.jpeg">>\
+  <<elseif $trash == "broken flower pot">>\
+    <<set _trashImagePath to "/dashboard-food/src/broken%20flower%20pot.jpeg">>\
+  <<elseif $trash == "plastic bag">>\
+    <<set _trashImagePath to "/dashboard-food/src/plastic%20bag.png">>\
+  <<elseif $trash == "saran wrapper">>\
+    <<set _trashImagePath to "/dashboard-food/src/saran%20wrapper.jpeg">>\
+  <<elseif $trash == "Gatorade bottle">>\
+    <<set _trashImagePath to "/dashboard-food/src/gatorade%20bottle.png">>\
+  <<elseif $trash == "cigarette box">>\
+    <<set _trashImagePath to "/dashboard-food/src/cigarette%20box.jpg">>\
+  <<elseif $trash == "dog toy">>\
+    <<set _trashImagePath to "/dashboard-food/src/dog%20toy.jpg">>\
+  <<elseif $trash == "tennis ball">>\
+    <<set _trashImagePath to "/dashboard-food/src/tennis%20ball.jpeg">>\
+  <<elseif $trash == "Nalgene bottle">>\
+    <<set _trashImagePath to "/dashboard-food/src/Nalgene%20bottle.jpg">>\
+  <<elseif $trash == "single airpod">>\
+    <<set _trashImagePath to "/dashboard-food/src/single%20airpod.jpg">>\
+  <<elseif $trash == "Scissors">>\
+    <<set _trashImagePath to "/dashboard-food/src/scissors.png">>\
+  <<elseif $trash == "Syringe">>\
+    <<set _trashImagePath to "/dashboard-food/src/syringe.png">>\
+  <<elseif $trash == "Rusty nails">>\
+    <<set _trashImagePath to "/dashboard-food/src/rusty%20nails.png">>\
+  <<elseif $trash == "Lettuce">>\
+    <<set _trashImagePath to "/dashboard-food/src/lettuce.png">>\
+  <<elseif $trash == "Lox bagel">>\
+    <<set _trashImagePath to "/dashboard-food/src/lox%20bagel.png">>\
+  <<elseif $trash == "Bikini bottoms">>\
+    <<set _trashImagePath to "/dashboard-food/src/bikini%20bottoms.png">>\
+  <<elseif $trash == "Wraparound sunglasses">>\
+    <<set _trashImagePath to "/dashboard-food/src/wraparound%20sunglasses.png">>\
+  <<elseif $trash == "A bag of Marshmallows">>\
+    <<set _trashImagePath to "/dashboard-food/src/an%20empty%20bag%20of%20marshmallows.png">>\
+  <<elseif $trash == "A playbill">>\
+    <<set _trashImagePath to "/dashboard-food/src/a%20playbill.png">>\
+  <<elseif $trash == "Shard of glass">>\
+    <<set _trashImagePath to "/dashboard-food/src/shard%20of%20glass.png">>\
+  <<elseif $trash == "A 7-11 Slurpee">>\
+    <<set _trashImagePath to "/dashboard-food/src/a%207eleven%20slurpee.png">>\
+  <<elseif $trash == "Pint of Ben n Jerrys Phish Food">>\
+    <<set _trashImagePath to "/dashboard-food/src/a%20pint%20of%20ben%20%26%20jerrys%20phish%20food.png">>\
+  <<elseif $trash == "A can of Fancy Feast">>\
+    <<set _trashImagePath to "/dashboard-food/src/a%20can%20of%20fancy%20feast.png">>\
+  <<elseif $trash == "Chopped Cheese in tinfoil">>\
+    <<set _trashImagePath to "/dashboard-food/src/chopped%20cheese%20wrapped%20in%20tinfoil.png">>\
+  <<elseif $trash == "Sneakers">>\
+    <<set _trashImagePath to "/dashboard-food/src/sneakers.png">>\
+  <<elseif $trash == "A funhouse mirror that makes you really looooong">>\
+    <<set _trashImagePath to "/dashboard-food/src/funhouse-mirror.png">>\
+  <<elseif $trash == "A grand piano">>\
+    <<set _trashImagePath to "/dashboard-food/src/a%20grand%20piano.png">>\
+  <<elseif $trash == "CitiBike">>\
+    <<set _trashImagePath to "/dashboard-food/src/citibike.png">>\
+  <<elseif $trash == "Umbilical cord">>\
+    <<set _trashImagePath to "/dashboard-food/src/umbilical%20cord.png">>\
+  <<elseif $trash == "tennis racket">>\
+    <<set _trashImagePath to "/dashboard-food/src/tennis%20racket.avif">>\
+  <</if>>\
+  <<if _trashImagePath != "">>\
+    <<print '<img class="trash-overlay-image" src="' + _trashImagePath + '" alt="' + $trash + '">'>>\
+  <</if>>\
+<</widget>>\
