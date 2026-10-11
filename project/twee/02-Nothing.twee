@@ -7,18 +7,19 @@ There's nothing here.
 (function generate() {
 
   let sourceTaste = {
-    "origin": "Your fish says something like:  #description#",
+    "origin": "You say something like:  #description#",
     "description": ["fuck I'm so hungry!", "nothing again??", "I'm going to throw a fit.", "I'm going to file a complaint if this doesn't change soon.", "please... I might starve...", "are we looking in the wrong place?", "Did you know that I'm hungry?", "ME HUNGRY!!!!!!"]
   }
   let grammar = tracery.createGrammar(sourceTaste);
   // grammar.addModifiers(tracery.baseEngModifiers);
-  let taste = grammar.flatten("#origin#");
+  let frustration = grammar.flatten("#origin#");
 
-  State.variables.taste = taste;
+  State.variables.frustration = frustration;
 
 })();
 <</script>>\
-
+\
+$frustration
 No worries. Let's keep going: 
 <<updateWidget>>
 <<link "I'm hungry.">>\

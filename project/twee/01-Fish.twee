@@ -4,7 +4,7 @@
 (function generate() {
 
   let sourceFish = {
-    "origin": "You've caught a #adjective# fish with #number# eyes, #number2# fins, and #color#-colored scales. \n\nIt might be #fish#.",
+    "origin": "You've caught a #adjective# fish with #number# eyes. Freaky.",
     "number": ["no", "one", "one", "two", "two", "two", "two", "two", "three", "four", "five", "an acceptable number of"],
     "number2": ["no", "two", "three", "four", "five", "six", "eight"],
     "color": ["emerald", "wine", "ocean", "diamond", "steel", "storm", "daffodil", "mint", "ice-cream", "paper", "plastic", "bottle-cap", "Sprite", "Coca Cola", "oak", "flesh","wax","lime","dishwater"],
@@ -56,7 +56,7 @@
         "working on myself",
         "not special"],
     // "barter": ["I'll tell you a secret", "I'll show you a better place to fish", "you'll never see me again", "I'll show you where my enemies are", "I'll be better"]
-    "barter": ["I'll show you a better place to fish", "I'll show you where my enemies are"]
+    "barter": ["I'll give you something of mine", "I'll tell you a secret"]
 
 }
 
@@ -85,4 +85,4 @@ $plea
 
 
 You can [[eat this.->05-Eating]]
-<<if $change_location is true>><<include "00-Option-Follow-Fish">><br><</if>>\
+

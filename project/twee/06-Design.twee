@@ -21,6 +21,9 @@ Choose your fish:
   </div>
 </div>
 
+:: 06-Born
+You are born! Congrats! Look at you: 
+
 :: 06-Your-Fish
 
 <<if $fishNum == 1>>\

@@ -7,8 +7,6 @@ FISH
 <<set $fishNum to 0>>
 <<set $size to 3>>
 <<set $status to 'init'>>
-<<set $location to 'the East River Esplanade'>>
-<<set $location_description to 'a small sliver where Manhattan lets you close to the water'>>
 <<set $trash to "none">>
 
 
@@ -22,7 +20,7 @@ Thanks for testing FISH with us!
 
 <<set $status to 'welcome'>>\
 
-You are born! Congrats! Look at you: 
+<<include "06-Born">>\
 <<include "06-Your-Fish">>\
 
 You are swimming around...very cool. 

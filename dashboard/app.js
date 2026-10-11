@@ -7,7 +7,6 @@ function renderFishCard(fish) {
     '<div class="fish-name">Fish ' + String(info.fish) + '</div>',
     '<div class="fish-status">Status: ' + String(info.status) + '</div>',
     '<div class="fish-size">Size: ' + String(info.size) + '</div>',
-    '<div class="fish-location">Location: ' + String(info.location) + '</div>',
     '</div>'
   ].join('');
 }
