@@ -33,6 +33,7 @@ body {
 }
 
 .quadrant {
+  --fish-color: var(--fg);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -40,6 +41,22 @@ body {
   padding: 24px;
   text-align: center;
   background: var(--bg);
+}
+
+.quadrant[data-fish="1"] {
+  --fish-color: #ff69b4;
+}
+
+.quadrant[data-fish="2"] {
+  --fish-color: #32cd32;
+}
+
+.quadrant[data-fish="3"] {
+  --fish-color: #ffd700;
+}
+
+.quadrant[data-fish="4"] {
+  --fish-color: #4da6ff;
 }
 
 .fish-card {
@@ -52,19 +69,16 @@ body {
 }
 
 .fish-name {
-  font-size: clamp(2.2rem, 4vw, 4rem);
+  font-size: clamp(2.6rem, 5vw, 4.8rem);
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  color: var(--fish-color);
 }
 
 .fish-status,
 .fish-size,
 .fish-location {
-  font-size: clamp(1.8rem, 2.8vw, 3rem);
-  color: var(--fg);
-}
-
-.fish-status {
-  color: var(--muted);
+  font-size: clamp(2.1rem, 3.5vw, 3.6rem);
+  color: var(--fish-color);
 }
