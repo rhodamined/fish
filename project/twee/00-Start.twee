@@ -26,11 +26,11 @@ Which fish are you?
 :: 00-Welcome
 
 <<set $status to 'welcome'>>\
-Welcome.
+You are born! Congrats! 
 
-You are at $location, $location_description.
+You are swimming around...very cool. 
 
-You've come to the right place. You can go fishing here. 
+You are feeling something, ... 
 
 <<updateWidget>>
 <<link "I'm hungry.">>\

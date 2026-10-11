@@ -1,0 +1,10 @@
+:: 06-Design
+
+Thanks for testing FISH with us!
+
+Which fish are you? 
+
+<<link "Fish 1" "00-Welcome">><<set $fishNum to 1>><</link>> 
+<<link "Fish 2" "00-Welcome">><<set $fishNum to 2>><</link>>
+<<link "Fish 3" "00-Welcome">><<set $fishNum to 3>><</link>>
+<<link "Fish 4" "00-Welcome">><<set $fishNum to 4>><</link>>
