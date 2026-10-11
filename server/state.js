@@ -14,11 +14,16 @@ function normalizeFishRecord(fishValue = {}, index = 0) {
     ? fishValue.location
     : 'none';
 
+  const trash = typeof fishValue.trash === 'string' && fishValue.trash.length > 0
+    ? fishValue.trash
+    : 'none';
+
   return {
     fish: fishNumber,
     status,
     size,
-    location
+    location,
+    trash
   };
 }
 
@@ -39,7 +44,8 @@ function createGameState(totalFish = 4) {
     fish: index + 1,
     status: 'none',
     size: 0,
-    location: 'none'
+    location: 'none',
+    trash: 'none'
   }, index));
 
   return {
@@ -94,7 +100,8 @@ function createGameState(totalFish = 4) {
           fish: index + 1,
           status: 'none',
           size: 0,
-          location: 'none'
+          location: 'none',
+          trash: 'none'
         }, index);
       }
 

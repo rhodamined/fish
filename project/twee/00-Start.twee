@@ -9,6 +9,7 @@ FISH
 <<set $status to 'init'>>
 <<set $location to 'the East River Esplanade'>>
 <<set $location_description to 'a small sliver where Manhattan lets you close to the water'>>
+<<set $trash to "none">>
 
 
 :: Start

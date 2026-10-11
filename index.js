@@ -8,31 +8,13 @@ const port = process.env.PORT || 3003;
 app.use(express.static('dist'));
 app.use(bodyParser.json());
 
-// database
-const sheets = require('./server/google_sheets');
 const dashboardRouter = require('./server/dashboard');
 const { createGameState } = require('./server/state');
 
 // game state
 const state = createGameState(4);
-
-(async function () {
-  try {
-    state.resetToDefaults();
-    await sheets.writeStateToGSheet(state.getState());
-    console.log('game state initialized to default values and synced to Google Sheets');
-  } catch (error) {
-    console.error('Unable to sync default game state to Google Sheets on startup:', error.message);
-  }
-
-	setInterval(async function () {
-    if (state.hasChanged()) {
-      console.log('state has changed, writing to gsheet');
-      await sheets.writeStateToGSheet(state.getState());
-      state.clearDirty();
-    }
-	}, 1000);
-})();
+state.resetToDefaults();
+console.log('game state initialized to default values in memory');
 
 /*---------------------------*/
 /* SERVER                    */
@@ -70,14 +52,7 @@ app.get('/state/:fishNum', async (req, res) => {
 
 app.post('/reset-state', async (req, res) => {
   const resetState = state.resetToDefaults();
-
-  try {
-    await sheets.writeStateToGSheet(resetState);
-    res.json({ ok: true, state: resetState });
-  } catch (error) {
-    console.error('Failed to reset game state in Google Sheets:', error.message);
-    res.status(500).json({ ok: false, error: 'Reset failed' });
-  }
+  res.json({ ok: true, state: resetState });
 });
 
 app.post('/reset', async (req, res) => {
@@ -93,16 +68,42 @@ app.post('/update/:fishNum/:status/:size/:location', async (req, res) => {
   const status = req.params.status;
   const size = Number.parseInt(req.params.size, 10);
   const location = req.params.location;
+  const trash = 'none';
 
-  console.log('index.js /update fishNum: ' + fishNum + ' status: ' + status + ' size: ' + size + ' location: ' + location);
+  console.log('index.js /update fishNum: ' + fishNum + ' status: ' + status + ' size: ' + size + ' location: ' + location + ' trash: ' + trash);
 
   const updatedFish = state.updateFish(fishNum, {
     fish: fishNum,
     status,
     size: Number.isFinite(size) ? size : 0,
-    location
+    location,
+    trash
   });
 
   console.log(updatedFish);
-  res.send('Success: updated ' + status + ': ' + size + ' - ' + location);
+  res.send('Success: updated ' + status + ': ' + size + ' - ' + location + ' - ' + trash);
+});
+
+// write current status; size; location; trash
+app.post('/update/:fishNum/:status/:size/:location/:trash', async (req, res) => {
+  const fishNum = Number(req.params.fishNum);
+  const status = req.params.status;
+  const size = Number.parseInt(req.params.size, 10);
+  const location = req.params.location;
+  const trash = typeof req.params.trash === 'string' && req.params.trash.length > 0
+    ? decodeURIComponent(req.params.trash)
+    : 'none';
+
+  console.log('index.js /update fishNum: ' + fishNum + ' status: ' + status + ' size: ' + size + ' location: ' + location + ' trash: ' + trash);
+
+  const updatedFish = state.updateFish(fishNum, {
+    fish: fishNum,
+    status,
+    size: Number.isFinite(size) ? size : 0,
+    location,
+    trash
+  });
+
+  console.log(updatedFish);
+  res.send('Success: updated ' + status + ': ' + size + ' - ' + location + ' - ' + trash);
 });

@@ -1,78 +1,91 @@
 const quadrantEls = Array.from(document.querySelectorAll('.quadrant'));
-const lastSizeByFish = new Map();
 
-function getFishVideoPath(fishNumber) {
-  return `/dashboard-fish/src/fish-${fishNumber}.mp4`;
+const trashMap = [
+  { label: 'bike wheel', file: 'bike wheel.png' },
+  { label: 'plastic bottle', file: 'plastic bottle.jpeg' },
+  { label: 'can of Sprite', file: 'can of Sprite.png' },
+  { label: 'hoof of a dead horse', file: 'hoof of a dead horse.jpeg' },
+  { label: 'hubcap', file: 'hubcap.jpg' },
+  { label: 'metal detector', file: 'metal detector.jpeg' },
+  { label: 'beer bottle', file: 'beer bottle.jpg' },
+  { label: 'beer can', file: 'beer can.png' },
+  { label: 'styrofoam takeout container', file: 'styrofoam takeout container.jpeg' },
+  { label: 'bamboo plant', file: 'bamboo plant.jpeg' },
+  { label: 'broken flower pot', file: 'broken flower pot.jpeg' },
+  { label: 'plastic bag', file: 'plastic bag.png' },
+  { label: 'saran wrapper', file: 'saran wrapper.jpeg' },
+  { label: 'gatorade bottle', file: 'gatorade bottle.png' },
+  { label: 'cigarette box', file: 'cigarette box.jpg' },
+  { label: 'dog toy', file: 'dog toy.jpg' },
+  { label: 'tennis ball', file: 'tennis ball.jpeg' },
+  { label: 'nalgene bottle', file: 'Nalgene bottle.jpg' },
+  { label: 'single airpod', file: 'single airpod.jpg' },
+  { label: 'scissors', file: 'scissors.png' },
+  { label: 'syringe', file: 'syringe.png' },
+  { label: 'rusty nails', file: 'rusty nails.png' },
+  { label: 'lettuce', file: 'lettuce.png' },
+  { label: 'lox bagel', file: 'lox bagel.png' },
+  { label: 'bikini bottoms', file: 'bikini bottoms.png' },
+  { label: 'wraparound sunglasses', file: 'wraparound sunglasses.png' },
+  { label: 'a bag of marshmallows', file: 'an empty bag of marshmallows.png' },
+  { label: 'a playbill', file: 'a playbill.png' },
+  { label: 'shard of glass', file: 'shard of glass.png' },
+  { label: 'a 7-11 slurpee', file: 'a 7eleven slurpee.png' },
+  { label: 'pint of ben n jerrys phish food', file: 'a pint of ben & jerrys phish food.png' },
+  { label: 'a can of fancy feast', file: 'a can of fancy feast.png' },
+  { label: 'chopped cheese in tinfoil', file: 'chopped cheese wrapped in tinfoil.png' },
+  { label: 'sneakers', file: 'sneakers.png' },
+  { label: 'a funhouse mirror that makes you really looooong', file: 'funhouse-mirror.png' },
+  { label: 'a grand piano', file: 'a grand piano.png' },
+  { label: 'citibike', file: 'citibike.png' },
+  { label: 'umbilical cord', file: 'umbilical cord.png' }
+];
+
+function normalizeTrashLabel(value) {
+  return String(value || '').trim().toLowerCase();
 }
 
-function getScaleFromSize(size) {
-  const numericSize = Number(size) || 0;
-  const growthFactor = Math.max(0, numericSize / 23.5);
-  return Math.min(3.4, Math.max(0.5, 0.7 + growthFactor * 2.4));
-}
-
-function getRippleScale(size) {
-  const numericSize = Number(size) || 0;
-  return Math.min(8, Math.max(2.4, 2.4 + numericSize / 8));
-}
-
-function getRippleOpacity(size) {
-  const numericSize = Number(size) || 0;
-  return Math.min(1, Math.max(0.8, 0.8 + numericSize / 20));
-}
-
-function triggerRipple(el, size) {
-  const rippleScale = getRippleScale(size);
-  const rippleOpacity = getRippleOpacity(size);
-
-  el.style.setProperty('--ripple-scale', String(rippleScale));
-  el.style.setProperty('--ripple-opacity', '1');
-  el.classList.remove('ripple-active');
-  void el.offsetWidth;
-  el.classList.add('ripple-active');
-
-  window.clearTimeout(el._rippleTimer);
-  el._rippleTimer = window.setTimeout(() => {
-    el.classList.remove('ripple-active');
-    el.style.setProperty('--ripple-opacity', '0');
-  }, 500);
-}
-
-function populateQuadrant(el, fish) {
-  const videoEl = el.querySelector('.fish-video');
-  const fishNumber = Number(el.dataset.fish);
-  const fishData = fish || { fish: fishNumber, status: 'none', size: 0, location: 'none' };
-  const previousSize = lastSizeByFish.get(fishNumber);
-
-  const videoPath = getFishVideoPath(fishNumber);
-  if (videoEl.dataset.src !== videoPath) {
-    videoEl.dataset.src = videoPath;
-    videoEl.src = videoPath;
-    videoEl.load();
-    videoEl.loop = true;
-    videoEl.muted = true;
-    videoEl.playsInline = true;
-    videoEl.autoplay = true;
-    videoEl.addEventListener('ended', () => {
-      videoEl.currentTime = 0;
-      videoEl.play().catch(() => {});
-    }, { once: true });
+function getTrashImagePath(label) {
+  const normalized = normalizeTrashLabel(label);
+  const match = trashMap.find((item) => normalizeTrashLabel(item.label) === normalized);
+  if (!match) {
+    return '';
   }
 
-  const fishScale = getScaleFromSize(fishData.size);
-  videoEl.style.setProperty('--fish-scale', String(fishScale));
-  videoEl.style.opacity = '1';
-  videoEl.play().catch(() => {});
+  return `/dashboard-food/src/${encodeURIComponent(match.file)}`;
+}
 
-  const currentSize = Number(fishData.size || 0);
-  const hasGrowth = previousSize !== undefined && currentSize > Number(previousSize);
-  const shouldRipple = previousSize === undefined && currentSize > 0 ? true : hasGrowth;
+function updateQuadrant(quadrant, fish) {
+  const fishNumber = Number(fish?.fish ?? quadrant.dataset.fish ?? 0);
+  const trash = typeof fish?.trash === 'string' ? fish.trash.trim() : '';
+  const label = trash && trash !== 'none' ? trash : '';
+  const hasTrash = Boolean(label);
+  const img = quadrant.querySelector('.trash-image');
+  const labelEl = quadrant.querySelector('.trash-label');
 
-  if (shouldRipple) {
-    triggerRipple(el, fishData.size);
+  if (!hasTrash) {
+    img.removeAttribute('src');
+    img.setAttribute('alt', '');
+    labelEl.textContent = '';
+    return;
   }
 
-  lastSizeByFish.set(fishNumber, currentSize);
+  const imagePath = getTrashImagePath(label);
+  if (imagePath) {
+    img.setAttribute('src', imagePath);
+  }
+  img.setAttribute('alt', label);
+  labelEl.textContent = `Fish ${fishNumber}: ${label}`;
+}
+
+function setFoodState(fishState) {
+  quadrantEls.forEach((quadrant) => {
+    const fishNumber = Number(quadrant.dataset.fish || 0);
+    const fish = fishState.find((entry) => Number(entry.fish) === fishNumber)
+      || { fish: fishNumber, trash: 'none' };
+
+    updateQuadrant(quadrant, fish);
+  });
 }
 
 async function refreshState() {
@@ -83,15 +96,10 @@ async function refreshState() {
     }
 
     const fishState = await response.json();
-    const map = new Map(fishState.map((fish) => [Number(fish.fish), fish]));
-
-    quadrantEls.forEach((el) => {
-      const fishNumber = Number(el.dataset.fish);
-      const fish = map.get(fishNumber) || { fish: fishNumber, status: 'none', size: 0, location: 'none' };
-      populateQuadrant(el, fish);
-    });
+    setFoodState(Array.isArray(fishState) ? fishState : []);
   } catch (error) {
-    console.error('Fish dashboard refresh failed:', error);
+    console.error('Food dashboard refresh failed:', error);
+    setFoodState([]);
   }
 }
 
