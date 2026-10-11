@@ -5,7 +5,7 @@ FISH
 
 /* Init global variables */\
 <<set $fishNum to 0>>
-<<set $size to 3>>
+<<set $size to 0>>
 <<set $status to 'init'>>
 <<set $trash to "none">>
 
